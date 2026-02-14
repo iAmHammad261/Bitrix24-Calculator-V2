@@ -15,5 +15,7 @@ export const changeTheItemFields = async (productID) => {
 
     const priceField = document.getElementById('total-price');
 
+    priceField.innerHTML = ''; 
+
     priceField.value = valuesToSet.totalPrice || '';
 }

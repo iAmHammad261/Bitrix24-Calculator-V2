@@ -8,8 +8,8 @@ export const changeTheItemFields = async (productID) => {
 
     console.log("Fetched product data:", productData);
 
-    const baseRate = productData.property115;
-    const grossarea = productData.property113;
+    const baseRate = productData.property115.value || 0;
+    const grossarea = productData.property113.value || 0;
 
     const valuesToSet = {
         totalPrice: Number((Number(baseRate) * Number(grossarea)).toFixed(2))

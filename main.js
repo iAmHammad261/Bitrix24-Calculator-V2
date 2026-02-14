@@ -56,9 +56,13 @@ const handlePaymentMethodChange = () => {
 
     if( selectedPaymentMethod == "full"){
         hideFilterFields(["installment-options-container"])
+        changeTheFinanceFields();
+        createTableOfInstallments();
     }
     if(selectedPaymentMethod == "installment"){
         unhideFilterFields(["installment-options-container"])
+         changeTheFinanceFields();
+        createTableOfInstallments();
     }
 
 }

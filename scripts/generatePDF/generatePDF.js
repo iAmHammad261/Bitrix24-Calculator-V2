@@ -7,7 +7,7 @@ export const generatePDFOfSummary = () => {
     doc.text("Premier Choice",20,20)
 
     // get the project field
-    const projectFieldValue = document.getElementById("project-name").textContent;
+    const projectFieldValue = document.getElementById("project-name").textContent.replace("Select a Project", "").trim();
 
     // add the next heading in the same row
     doc.text(`${projectFieldValue}`, 150, 20);

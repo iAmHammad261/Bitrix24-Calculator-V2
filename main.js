@@ -6,6 +6,7 @@ import { hideFilterFields } from "./scripts/changeVisibiltyOfFilterFeilds/hideFi
 import { unhideFilterFields } from "./scripts/changeVisibiltyOfFilterFeilds/unhideFilterFeilds.js";
 import { changeTheFinanceFields } from "./scripts/changeFields.js/changeTheFinanceFeilds.js";
 import { createTableOfInstallments } from "./scripts/CreateTableOfInstallments/createTableOfInstallments.js";
+import { generatePDFOfSummary } from "./scripts/generatePDF/generatePDF.js";
 
 // A simple console log to verify connection
 console.log('Script loaded successfully from the scripts folder!');
@@ -24,6 +25,7 @@ const paymentMethodSelect = document.getElementById("payment-condition");
 const downPaymentPercentageSelect = document.getElementById("downpayment-percentage");
 const onPossessionPercentageSelect = document.getElementById("possession-percentage");
 const installmentPlanSelect = document.getElementById("installment-duration");
+const downloadButtonSelect = document.getElementById("menu-download-pdf");
 
 const handleFilterChange = async () => {
     const filters = {
@@ -91,6 +93,10 @@ downPaymentPercentageSelect.addEventListener('change', handlechangeOfFinanceValu
 onPossessionPercentageSelect.addEventListener('change', handlechangeOfFinanceValues);
 
 installmentPlanSelect.addEventListener('change', handlechangeOfFinanceValues);
+
+downloadButtonSelect.addEventListener('click', generatePDFOfSummary);
+
+
 
 
 

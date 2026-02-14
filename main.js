@@ -2,6 +2,8 @@ import { populateFilters } from "./scripts/PopulateFilters/populateInitialFilter
 import { getTheProductWithFilter } from "./scripts/Bitrix24HelperFunctions/getTheProductWithFilter.js";
 import { populateItemFilter } from "./scripts/PopulateFilters/populateItemFilter.js";
 import { changeTheItemFields } from "./scripts/changeFields.js/changeTheItemFeilds.js";
+import { hideFilterFields } from "./scripts/changeVisibiltyOfFilterFeilds/hideFilterFeilds.js";
+import { unhideFilterFields } from "./scripts/changeVisibiltyOfFilterFeilds/unhideFilterFeilds.js";
 
 // A simple console log to verify connection
 console.log('Script loaded successfully from the scripts folder!');
@@ -16,6 +18,7 @@ const projectSelect = document.getElementById('project-name');
 const propertyTypeSelect = document.getElementById('property-type');
 const propertyCategorySelect = document.getElementById('property-category');
 const itemFilterSelect = document.getElementById("property-item");
+const paymentMethodSelect = document.getElementById("payment-condition");
 
 
 const handleFilterChange = async () => {
@@ -39,6 +42,21 @@ const handleItemChange = async () => {
     await changeTheItemFields(selectedItemId);
 }
 
+const handlePaymentMethodChange = () => {
+
+    const selectedPaymentMethod = paymentMethodSelect.value;
+    
+    console.log("Selected payment method:", selectedPaymentMethod);
+
+    if( selectedPaymentMethod == "Full Payment"){
+        hideFilterFields(["downpayment-percentage","possession-percentage","installment-duration"])
+    }
+    if(selectedPaymentMethod == "Installment Plan"){
+        unhideFilterFields(["downpayment-percentage","possession-percentage","installment-duration"])
+    }
+
+}
+
 
 
 projectSelect.addEventListener('change', handleFilterChange);
@@ -47,10 +65,9 @@ propertyTypeSelect.addEventListener('change', handleFilterChange)
 
 propertyCategorySelect.addEventListener('change', handleFilterChange);
 
-
-
-
 itemFilterSelect.addEventListener('change', handleItemChange);
+
+paymentMethodSelect.addEventListener('change', handlePaymentMethodChange);
 
 
 

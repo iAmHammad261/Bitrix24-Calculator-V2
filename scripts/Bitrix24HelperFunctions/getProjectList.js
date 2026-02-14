@@ -6,6 +6,8 @@ export const getProjectList = async () => {
         const projects = await callBX24Method('catalog.productPropertyEnum.list', {filter: {propertyId: 173}});
 
         console.log('Projects:', projects);
+
+        return projects;
     }
     catch (error){
         console.error('Error fetching projects:', error);

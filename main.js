@@ -1,4 +1,4 @@
-import { populateFilters } from "./scripts/PopulateFilters/populateInitalFilters.js";
+import { populateFilters } from "./scripts/PopulateFilters/populateInitialFilters.js";
 import { getTheProductWithFilter } from "./scripts/Bitrix24HelperFunctions/getTheProductWithFilter.js";
 import { populateItemFilter } from "./scripts/PopulateFilters/populateItemFilter.js";
 

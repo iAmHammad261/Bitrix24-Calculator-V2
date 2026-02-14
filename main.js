@@ -30,19 +30,14 @@ const handleFilterChange = async () => {
         if(productList && productList.length > 0){
             populateItemFilter(productList);
         }
-
-
-
     }
-
-
 
 }
 
 
 
 
-    projectSelect.addEventListener('change', handleFilterChange);
+projectSelect.addEventListener('change', handleFilterChange);
 
 propertyTypeSelect.addEventListener('change', handleFilterChange)
 

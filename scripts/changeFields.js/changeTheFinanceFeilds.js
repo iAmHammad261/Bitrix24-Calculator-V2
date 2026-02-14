@@ -1,5 +1,4 @@
-export const changeTheFinanceFields = ({
-}) => {
+export const changeTheFinanceFields = () => {
 
     const downPaymentPercentage = document.getElementById("downpayment-percentage").value;
     const onPossessionPercentage = document.getElementById("possession-percentage").value;

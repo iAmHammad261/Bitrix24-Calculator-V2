@@ -6,6 +6,8 @@ export const generatePDFOfSummary = () => {
     doc.setFontSize(18);
     doc.text("Premier Choice",20,20)
 
+    const projectSelect = document.getElementById("project-name");
+
     // get the project field
     const projectText = projectSelect.options[projectSelect.selectedIndex].text;
 

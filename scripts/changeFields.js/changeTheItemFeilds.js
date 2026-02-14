@@ -12,7 +12,7 @@ export const changeTheItemFields = async (productID) => {
     const grossarea = productData.product.property113.value || 0;
 
     const valuesToSet = {
-        totalPrice: Number((Number(baseRate) * Number(grossarea)).toFixed(2))
+        totalPrice: Number((Number(baseRate.replace(/,/g, '')) * Number(grossarea.replace(/,/g, ''))).toFixed(2))
     }
 
     console.log("Calculated values to set:", valuesToSet);

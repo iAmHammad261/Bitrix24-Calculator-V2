@@ -1,27 +1,36 @@
 import { callBX24Method } from "../Bitrix24HelperFunctions/callBX24Method.js";
 
 export const changeTheItemFields = async (productID) => {
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
 
-    console.log("Changing fields for product ID:", productID);
+    currency: "USD",
+  });
 
-    const productData = await callBX24Method('catalog.product.get', {id: productID});
+  console.log("Changing fields for product ID:", productID);
 
-    console.log("Fetched product data:", productData);
+  const productData = await callBX24Method("catalog.product.get", {
+    id: productID,
+  });
 
-    const baseRate = productData.product.property115.value || 0;
-    const grossarea = productData.product.property113.value || 0;
+  console.log("Fetched product data:", productData);
 
-    const valuesToSet = {
-        totalPrice: Number((Number(baseRate.replace(/,/g, '')) * Number(grossarea.replace(/,/g, ''))).toFixed(2))
-    }
+  const baseRate = productData.product.property115.value || 0;
+  const grossarea = productData.product.property113.value || 0;
 
-    console.log("Calculated values to set:", valuesToSet);
+  const valuesToSet = {
+    totalPrice: Number(
+      (
+        Number(baseRate.replace(/,/g, "")) * Number(grossarea.replace(/,/g, ""))
+      ).toFixed(2),
+    ),
+  };
 
+  console.log("Calculated values to set:", valuesToSet);
 
+  const priceField = document.getElementById("total-price");
 
-    const priceField = document.getElementById('total-price');
+  priceField.innerHTML = "";
 
-    priceField.innerHTML = ''; 
-
-    priceField.value = valuesToSet.totalPrice || '';
-}
+  priceField.value =  valuesToSet.totalPrice ? formatter.format(valuesToSet.totalPrice) : '';
+};

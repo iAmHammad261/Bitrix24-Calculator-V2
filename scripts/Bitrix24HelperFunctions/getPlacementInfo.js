@@ -1,4 +1,4 @@
-import { callBX24Method } from "./callBX24Method";
+import { callBX24Method } from "./callBX24Method.js";
 
 
 export const getPlacementInfo = async () => {

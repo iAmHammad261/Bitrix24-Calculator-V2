@@ -1,4 +1,12 @@
 export const createTableOfInstallments = () => {
+
+     const formatter = new Intl.NumberFormat("en-US", {
+    style: "decimal",
+
+    currency: "USD",
+  });
+
+
     const getInstallmentNumber = document.getElementById('installment-duration').value;
     const installmentPerAmount = document.getElementById('summary-installment').textContent.replace(/[^0-9.-]+/g, "") || 0;
 
@@ -13,12 +21,12 @@ export const createTableOfInstallments = () => {
         const installmentCell = document.createElement('td');
         // Changed text-gray-300 to text-gray-900 (Black)
         installmentCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-gray-900', 'font-medium');
-        installmentCell.textContent = `Installment ${i}`;
+        installmentCell.textContent = `${i}`;
 
         const amountCell = document.createElement('td');
         // Changed text-gray-300 to text-gray-900 (Black)
         amountCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-gray-900');
-        amountCell.textContent = `$${installmentPerAmount}`;
+        amountCell.textContent = `${formatter.format(installmentPerAmount)}`;
 
         row.appendChild(installmentCell);
         row.appendChild(amountCell);

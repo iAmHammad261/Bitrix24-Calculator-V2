@@ -15,6 +15,8 @@ export const changeTheItemFields = async (productID) => {
         totalPrice: Number((Number(baseRate) * Number(grossarea)).toFixed(2))
     }
 
+    console.log("Calculated values to set:", valuesToSet);
+
 
 
     const priceField = document.getElementById('total-price');

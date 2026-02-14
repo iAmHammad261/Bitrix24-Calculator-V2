@@ -1,5 +1,18 @@
 export const populateItemFilter = (projectlist) => {
 
+    if(!projectlist || projectlist.length === 0){
+        console.warn("No products found to populate item filter.");
+        // clear the select options and say no items found
+        const itemFilterSelect = document.getElementById("property-item");
+        itemFilterSelect.innerHTML = ""; // Clear existing options
+        const defaultOpt = document.createElement("option");
+        defaultOpt.value = "";
+        defaultOpt.text = "No items found for selected filters";
+        defaultOpt.className = "red-500";
+        itemFilterSelect.appendChild(defaultOpt);
+        return;
+    }
+
     const itemFilterSelect = document.getElementById("property-item") 
 
     // create default option

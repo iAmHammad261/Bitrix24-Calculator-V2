@@ -34,13 +34,18 @@ export const changeTheItemFields = async (productID) => {
         Number(baseRate.replace(/,/g, "")) * Number(grossarea.replace(/,/g, ""))
       ).toFixed(2),
     ),
+    grossArea: grossarea,
+    baseRate: baseRate,
   };
 
   console.log("Calculated values to set:", valuesToSet);
 
-  
-
   priceField.innerHTML = "";
 
+  const grossAreaField = document.getElementById("gross-area");
+  const baseRateField = document.getElementById("base-rate");
+
+  grossAreaField.value = valuesToSet.grossArea;
+  baseRateField.value = valuesToSet.baseRate;
   priceField.value =  valuesToSet.totalPrice ? formatter.format(valuesToSet.totalPrice) : '';
 };

@@ -49,10 +49,10 @@ const handlePaymentMethodChange = () => {
     console.log("Selected payment method:", selectedPaymentMethod);
 
     if( selectedPaymentMethod == "full"){
-        hideFilterFields(["downpayment-percentage","possession-percentage","installment-duration"])
+        hideFilterFields(["installment-options-container"])
     }
     if(selectedPaymentMethod == "installment"){
-        unhideFilterFields(["downpayment-percentage","possession-percentage","installment-duration"])
+        unhideFilterFields(["installment-options-container"])
     }
 
 }

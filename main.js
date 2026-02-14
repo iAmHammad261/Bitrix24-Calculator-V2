@@ -45,13 +45,13 @@ const handleItemChange = async () => {
 const handlePaymentMethodChange = () => {
 
     const selectedPaymentMethod = paymentMethodSelect.value;
-    
+
     console.log("Selected payment method:", selectedPaymentMethod);
 
-    if( selectedPaymentMethod == "Full Payment"){
+    if( selectedPaymentMethod == "full"){
         hideFilterFields(["downpayment-percentage","possession-percentage","installment-duration"])
     }
-    if(selectedPaymentMethod == "Installment Plan"){
+    if(selectedPaymentMethod == "installment"){
         unhideFilterFields(["downpayment-percentage","possession-percentage","installment-duration"])
     }
 

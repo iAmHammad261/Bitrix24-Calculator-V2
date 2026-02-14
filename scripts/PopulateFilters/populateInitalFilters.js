@@ -111,5 +111,7 @@ const CATEGORY_PROPERTY_ID = 139;
      categorySelect.appendChild(option);
    });
 
+
+
    
 };

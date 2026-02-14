@@ -1,6 +1,16 @@
 import { callBX24Method } from "../Bitrix24HelperFunctions/callBX24Method.js";
 
 export const changeTheItemFields = async (productID) => {
+
+    const priceField = document.getElementById("total-price");
+
+    if(!productID){
+        priceField.value = '';
+        return;
+    }
+
+
+
   const formatter = new Intl.NumberFormat("en-US", {
     style: "decimal",
 
@@ -28,7 +38,7 @@ export const changeTheItemFields = async (productID) => {
 
   console.log("Calculated values to set:", valuesToSet);
 
-  const priceField = document.getElementById("total-price");
+  
 
   priceField.innerHTML = "";
 

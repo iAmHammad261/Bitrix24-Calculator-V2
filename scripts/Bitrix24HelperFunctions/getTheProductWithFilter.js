@@ -18,7 +18,7 @@ export const getTheProductWithFilter = async (filter) => {
         filterForProduct['PROPERTY_173'] = filter.project;
     }
 
-    // console.log("🚀 Starting product crawl with filters:", filterForProduct);
+    
 
     // 2. The Crawl Loop
     while (!finish) {

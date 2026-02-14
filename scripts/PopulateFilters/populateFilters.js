@@ -6,7 +6,8 @@ import { getListProperties } from "../Bitrix24HelperFunctions/getTheListProperti
 
 export const populateFilters = async () => {
 
-    const TYPE_PROPERTY_ID = 177; 
+const TYPE_PROPERTY_ID = 177; 
+const CATEGORY_PROPERTY_ID = 139;
 
   // first fetch the project list and then populate the filters with the project names:
   const projectSelect = document.getElementById("project-name");
@@ -82,4 +83,33 @@ export const populateFilters = async () => {
      typeSelect.appendChild(option);
    });
 
+   
+
+   // get the property of the category:
+   const categoryList = await getListProperties(CATEGORY_PROPERTY_ID); // replace with actual property ID
+   
+
+   const categorySelect = document.getElementById("property-category");
+   if (!categorySelect) return;
+
+   // Clear existing options
+   categorySelect.innerHTML = "";
+
+   // Add a default blank option
+   const defaultOpt2 = document.createElement("option");
+   defaultOpt2.value = "";
+   defaultOpt2.text = "Select a Property Category";
+   defaultOpt2.className = "text-black";
+   categorySelect.appendChild(defaultOpt2);
+
+   // Populate with the list of property categories
+   categoryList.productPropertyEnums.forEach((category) => {
+     const option = document.createElement("option");
+     option.value = category.id;
+     option.text = category.value;
+     option.className = "text-black";
+     categorySelect.appendChild(option);
+   });
+
+   
 };

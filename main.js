@@ -4,6 +4,7 @@ import { populateItemFilter } from "./scripts/PopulateFilters/populateItemFilter
 import { changeTheItemFields } from "./scripts/changeFields.js/changeTheItemFeilds.js";
 import { hideFilterFields } from "./scripts/changeVisibiltyOfFilterFeilds/hideFilterFeilds.js";
 import { unhideFilterFields } from "./scripts/changeVisibiltyOfFilterFeilds/unhideFilterFeilds.js";
+import { changeTheFinanceFields } from "./scripts/changeFields.js/changeTheFinanceFeilds.js";
 
 // A simple console log to verify connection
 console.log('Script loaded successfully from the scripts folder!');
@@ -70,6 +71,7 @@ const handlechangeOfFinanceValues = () => {
     console.log("On Possession Percentage:", onPossessionPercentage);
     console.log("Installment Plan:", installmentPlan);
 
+    changeTheFinanceFields({ downPaymentPercentage, onPossessionPercentage, installmentPlan });
 }
 
 

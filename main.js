@@ -5,6 +5,7 @@ import { changeTheItemFields } from "./scripts/changeFields.js/changeTheItemFeil
 import { hideFilterFields } from "./scripts/changeVisibiltyOfFilterFeilds/hideFilterFeilds.js";
 import { unhideFilterFields } from "./scripts/changeVisibiltyOfFilterFeilds/unhideFilterFeilds.js";
 import { changeTheFinanceFields } from "./scripts/changeFields.js/changeTheFinanceFeilds.js";
+import { createTableOfInstallments } from "./scripts/CreateTableOfInstallments/createTableOfInstallments.js";
 
 // A simple console log to verify connection
 console.log('Script loaded successfully from the scripts folder!');
@@ -44,6 +45,7 @@ const handleItemChange = async () => {
     const selectedItemId = itemFilterSelect.value;
     await changeTheItemFields(selectedItemId);
     changeTheFinanceFields();
+    createTableOfInstallments();
 }
 
 const handlePaymentMethodChange = () => {
@@ -65,6 +67,7 @@ const handlePaymentMethodChange = () => {
 // handle the change of the downpayment percentage,on possession percentage, and installment plans
 const handlechangeOfFinanceValues = () => {
    changeTheFinanceFields();
+   createTableOfInstallments();
 }
 
 

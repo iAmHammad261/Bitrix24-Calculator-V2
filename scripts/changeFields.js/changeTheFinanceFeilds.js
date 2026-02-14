@@ -1,5 +1,11 @@
 export const changeTheFinanceFields = () => {
 
+     const formatter = new Intl.NumberFormat("en-US", {
+    style: "decimal",
+
+    currency: "USD",
+  });
+
 const downPaymentAmountField = document.getElementById("summary-downpayment");
 
   const onPossessionAmountField = document.getElementById(
@@ -55,11 +61,7 @@ const downPaymentAmountField = document.getElementById("summary-downpayment");
   console.log("On Possession Percentage:", onPossessionPercentage);
   console.log("Installment Plan:", installmentPlan);
 
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "decimal",
-
-    currency: "USD",
-  });
+ 
 
   const downPaymentAmount = parseFloat(
     (productPrice * downPaymentPercentage) / 100,

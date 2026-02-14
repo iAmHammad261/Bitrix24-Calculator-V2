@@ -1,27 +1,27 @@
 export const createTableOfInstallments = () => {
-    
     const getInstallmentNumber = document.getElementById('installment-duration').value;
     const installmentPerAmount = document.getElementById('summary-installment').textContent.replace(/[^0-9.-]+/g, "") || 0;
-
 
     const tableBody = document.getElementById('installment-table-body');
     tableBody.innerHTML = '';
 
     for (let i = 1; i <= getInstallmentNumber; i++) {
         const row = document.createElement('tr');
-        row.classList.add('bg-white/10', 'border-b', 'border-white/20');
+        // Removed the white/10 background to ensure black text is readable on white
+        row.classList.add('bg-white', 'border-b', 'border-gray-200');
+
         const installmentCell = document.createElement('td');
-        installmentCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-gray-300');
+        // Changed text-gray-300 to text-gray-900 (Black)
+        installmentCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-gray-900', 'font-medium');
         installmentCell.textContent = `Installment ${i}`;
 
         const amountCell = document.createElement('td');
-        amountCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-gray-300');
+        // Changed text-gray-300 to text-gray-900 (Black)
+        amountCell.classList.add('px-6', 'py-4', 'whitespace-nowrap', 'text-sm', 'text-gray-900');
         amountCell.textContent = `$${installmentPerAmount}`;
 
         row.appendChild(installmentCell);
         row.appendChild(amountCell);
         tableBody.appendChild(row);
     }
-
-
 }

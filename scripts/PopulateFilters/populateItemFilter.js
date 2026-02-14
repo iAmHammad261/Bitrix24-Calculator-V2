@@ -1,5 +1,10 @@
 export const populateItemFilter = (projectlist) => {
 
+    const itemFilterSelect = document.getElementById("property-item") 
+
+    // clear all the options first
+    itemFilterSelect.innerHTML = "";
+
     if(!projectlist || projectlist.length === 0){
         console.warn("No products found to populate item filter.");
         // clear the select options and say no items found
@@ -13,7 +18,7 @@ export const populateItemFilter = (projectlist) => {
         return;
     }
 
-    const itemFilterSelect = document.getElementById("property-item") 
+    
 
     // create default option
     const defaultOpt = document.createElement("option");

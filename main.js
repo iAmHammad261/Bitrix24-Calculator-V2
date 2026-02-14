@@ -27,9 +27,7 @@ const handleFilterChange = async () => {
 
     if(filters){
         const productList = await getTheProductWithFilter(filters);
-        if(productList && productList.length > 0){
             populateItemFilter(productList);
-        }
     }
 
 }

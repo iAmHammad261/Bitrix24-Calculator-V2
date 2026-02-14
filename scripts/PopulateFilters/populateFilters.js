@@ -1,9 +1,12 @@
 import { getProjectList } from "../Bitrix24HelperFunctions/getProjectList.js";
 import { getPlacementInfo } from "../Bitrix24HelperFunctions/getPlacementInfo.js";
 import { getLeadData } from "../Bitrix24HelperFunctions/getLeadData.js";
+import { getListProperties } from "../Bitrix24HelperFunctions/getTheListProperties.js";
 
 
 export const populateFilters = async () => {
+
+    const TYPE_PROPERTY_ID = 177; 
 
   // first fetch the project list and then populate the filters with the project names:
   const projectSelect = document.getElementById("project-name");
@@ -51,5 +54,32 @@ export const populateFilters = async () => {
     if (leadTitleInput) {
         leadTitleInput.value = leadTitle;
     }
+
+
+   // get the property of the type:
+   const typeList = await getListProperties(TYPE_PROPERTY_ID); // replace with actual property ID
+   
+
+   const typeSelect = document.getElementById("property-type");
+   if (!typeSelect) return;
+
+   // Clear existing options
+   typeSelect.innerHTML = "";
+
+   // Add a default blank option
+   const defaultOpt = document.createElement("option");
+   defaultOpt.value = "";
+   defaultOpt.text = "Select a Property Type";
+   defaultOpt.className = "text-black";
+   typeSelect.appendChild(defaultOpt);
+
+   // Populate with the list of property types
+   typeList.productPropertyEnums.forEach((type) => {
+     const option = document.createElement("option");
+     option.value = type.id;
+     option.text = type.value;
+     option.className = "text-black";
+     typeSelect.appendChild(option);
+   });
 
 };

@@ -19,7 +19,9 @@ const propertyTypeSelect = document.getElementById('property-type');
 const propertyCategorySelect = document.getElementById('property-category');
 const itemFilterSelect = document.getElementById("property-item");
 const paymentMethodSelect = document.getElementById("payment-condition");
-
+const downPaymentPercentageSelect = document.getElementById("downpayment-percentage");
+const onPossessionPercentageSelect = document.getElementById("possession-percentage");
+const installmentPlanSelect = document.getElementById("installment-duration");
 
 const handleFilterChange = async () => {
     const filters = {
@@ -58,6 +60,19 @@ const handlePaymentMethodChange = () => {
 }
 
 
+// handle the change of the downpayment percentage,on possession percentage, and installment plans
+const handlechangeOfFinanceValues = () => {
+    const downPaymentPercentage = document.getElementById("downpayment-percentage").value;
+    const onPossessionPercentage = document.getElementById("possession-percentage").value;
+    const installmentPlan = document.getElementById("installment-duration").value;
+
+    console.log("Down Payment Percentage:", downPaymentPercentage);
+    console.log("On Possession Percentage:", onPossessionPercentage);
+    console.log("Installment Plan:", installmentPlan);
+
+}
+
+
 
 projectSelect.addEventListener('change', handleFilterChange);
 
@@ -68,6 +83,14 @@ propertyCategorySelect.addEventListener('change', handleFilterChange);
 itemFilterSelect.addEventListener('change', handleItemChange);
 
 paymentMethodSelect.addEventListener('change', handlePaymentMethodChange);
+
+downPaymentPercentageSelect.addEventListener('change', handlechangeOfFinanceValues);
+
+onPossessionPercentageSelect.addEventListener('change', handlechangeOfFinanceValues);
+
+installmentPlanSelect.addEventListener('change', handlechangeOfFinanceValues);
+
+
 
 
 

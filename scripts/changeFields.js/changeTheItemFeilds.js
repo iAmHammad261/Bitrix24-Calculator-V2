@@ -2,7 +2,7 @@ import { callBX24Method } from "../Bitrix24HelperFunctions/callBX24Method.js";
 
 export const changeTheItemFields = async (productID) => {
   const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
+    style: "decimal",
 
     currency: "USD",
   });

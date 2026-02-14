@@ -1,17 +1,6 @@
 export const changeTheFinanceFields = () => {
-  const downPaymentPercentage = document.getElementById(
-    "downpayment-percentage",
-  ).value;
-  const onPossessionPercentage = document.getElementById(
-    "possession-percentage",
-  ).value;
-  const installmentPlan = document.getElementById("installment-duration").value;
-  const productPrice =
-    parseFloat(
-      document.getElementById("total-price").value.replace(/[^0-9.-]+/g, ""),
-    ) || 0;
 
-  const downPaymentAmountField = document.getElementById("summary-downpayment");
+const downPaymentAmountField = document.getElementById("summary-downpayment");
 
   const onPossessionAmountField = document.getElementById(
     "summary-possession-amount",
@@ -28,6 +17,39 @@ export const changeTheFinanceFields = () => {
   );
 
   const totalPriceField = document.getElementById("summary-total-price");
+
+  const productPrice =
+    parseFloat(
+      document.getElementById("total-price").value.replace(/[^0-9.-]+/g, ""),
+    ) || 0;
+
+    
+    const plan = document.getElementById("payment-condition").value;
+    
+  
+
+    if( plan == "full"){
+        totalPriceField.textContent = formatter.format(productPrice);
+        downPaymentAmountField.textContent = '';
+        onPossessionAmountField.textContent = '';
+        installmentAmountField.textContent = '';
+        installmentAmountPerInstallmentField.textContent = '';
+        installmentUnitsField.textContent = '';
+        return;
+    }
+
+
+
+  const downPaymentPercentage = document.getElementById(
+    "downpayment-percentage",
+  ).value;
+  const onPossessionPercentage = document.getElementById(
+    "possession-percentage",
+  ).value;
+  const installmentPlan = document.getElementById("installment-duration").value;
+  
+
+ 
 
   console.log("Down Payment Percentage:", downPaymentPercentage);
   console.log("On Possession Percentage:", onPossessionPercentage);

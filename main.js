@@ -14,11 +14,7 @@ const propertyTypeSelect = document.getElementById('property-type');
 const propertyCategorySelect = document.getElementById('property-category');
 
 
-// Add an event listener
-button.addEventListener('click', () => {
-    // outputText.textContent = "You clicked the button! JavaScript is working.";
-    console.log("Button clicked.");
-});
+
 
 projectSelect.addEventListener('change', () => {
     // outputText.textContent = `Selected project: ${projectSelect.value}`;

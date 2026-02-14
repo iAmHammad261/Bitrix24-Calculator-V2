@@ -1,4 +1,4 @@
-import { populateFilters } from "./PopulateFilters/populateFilters.js";
+import { populateFilters } from "./scripts/PopulateFilters/populateFilters.js";
 
 // A simple console log to verify connection
 console.log('Script loaded successfully from the scripts folder!');

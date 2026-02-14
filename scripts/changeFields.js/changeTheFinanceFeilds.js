@@ -1,8 +1,15 @@
 export const changeTheFinanceFields = ({
-  downPaymentPercentage,
-  onPossessionPercentage,
-  installmentPlan,
 }) => {
+
+    const downPaymentPercentage = document.getElementById("downpayment-percentage").value;
+    const onPossessionPercentage = document.getElementById("possession-percentage").value;
+    const installmentPlan = document.getElementById("installment-duration").value;
+
+    console.log("Down Payment Percentage:", downPaymentPercentage);
+    console.log("On Possession Percentage:", onPossessionPercentage);
+    console.log("Installment Plan:", installmentPlan);
+
+
   const formatter = new Intl.NumberFormat("en-US", {
     style: "decimal",
 

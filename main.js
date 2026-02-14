@@ -43,6 +43,7 @@ const handleFilterChange = async () => {
 const handleItemChange = async () => {
     const selectedItemId = itemFilterSelect.value;
     await changeTheItemFields(selectedItemId);
+    changeTheFinanceFields();
 }
 
 const handlePaymentMethodChange = () => {
@@ -63,15 +64,7 @@ const handlePaymentMethodChange = () => {
 
 // handle the change of the downpayment percentage,on possession percentage, and installment plans
 const handlechangeOfFinanceValues = () => {
-    const downPaymentPercentage = document.getElementById("downpayment-percentage").value;
-    const onPossessionPercentage = document.getElementById("possession-percentage").value;
-    const installmentPlan = document.getElementById("installment-duration").value;
-
-    console.log("Down Payment Percentage:", downPaymentPercentage);
-    console.log("On Possession Percentage:", onPossessionPercentage);
-    console.log("Installment Plan:", installmentPlan);
-
-    changeTheFinanceFields({ downPaymentPercentage, onPossessionPercentage, installmentPlan });
+   changeTheFinanceFields();
 }
 
 

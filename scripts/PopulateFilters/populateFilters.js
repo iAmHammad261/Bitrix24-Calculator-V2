@@ -22,7 +22,7 @@ export const populateFilters = async () => {
     projectSelect.appendChild(defaultOpt);
 
     // Loop through the data you shared
-    projectList.forEach((project) => {
+    projectList.productPropertyEnums.forEach((project) => {
       const option = document.createElement("option");
       // We use the 'id' for the value because Bitrix needs IDs for updates
       option.value = project.id;

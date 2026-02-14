@@ -2,6 +2,8 @@ import { callBX24Method } from "../Bitrix24HelperFunctions/callBX24Method.js";
 
 export const changeTheItemFields = async (productID) => {
 
+    console.log("Changing fields for product ID:", productID);
+
     const productData = await callBX24Method('catalog.product.get', {id: productID});
 
     const baseRate = productData.property115;

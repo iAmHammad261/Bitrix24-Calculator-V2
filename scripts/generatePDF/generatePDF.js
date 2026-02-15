@@ -34,64 +34,121 @@ export const generatePDFOfSummary = async () => {
 
   // 1. Gather Data from DOM
   try {
-    const projectSelect = document.getElementById("project-name");
-    const clientNameInput = document.getElementById("client-name");
-    const propertyTypeSelect = document.getElementById("property-type");
-    const itemFilterSelect = document.getElementById("property-item");
-    const paymentMethodSelect = document.getElementById("payment-condition");
-    const grossAreaInput = document.getElementById("gross-area");
-    const totalPriceInput = document.getElementById("summary-total-price");
-    const installmentsInput = document.getElementById(
-      "summary-installments-no",
-    );
-    const downPaymentPercInput = document.getElementById("summary-downpayment");
-    const possessionPercInput = document.getElementById(
-      "possession-percentage",
-    );
-    const possessionAmtInput = document.getElementById(
-      "summary-possession-amount",
-    );
-    const installmentAmtInput = document.getElementById("summary-remaining");
+    // const projectSelect = document.getElementById("project-name");
+    // const clientNameInput = document.getElementById("client-name");
+    // const propertyTypeSelect = document.getElementById("property-type");
+    // const itemFilterSelect = document.getElementById("property-item");
+    // const paymentMethodSelect = document.getElementById("payment-condition");
+    // const grossAreaInput = document.getElementById("gross-area");
+    // const totalPriceInput = document.getElementById("summary-total-price");
+    // const installmentsInput = document.getElementById(
+    //   "summary-installments-no",
+    // );
+    // const downPaymentPercInput = document.getElementById("summary-downpayment");
+    // const possessionPercInput = document.getElementById(
+    //   "possession-percentage",
+    // );
+    // const possessionAmtInput = document.getElementById(
+    //   "summary-possession-amount",
+    // );
+    // const installmentAmtInput = document.getElementById("summary-remaining");
 
-    // DEBUG: Check if any element is missing
-    if (!totalPriceInput || !paymentMethodSelect) {
-      console.error(
-        "[PDF Gen] CRITICAL ERROR: Missing DOM elements! Check your IDs ('summary-total-price', etc.)",
-      );
-    }
+    // // DEBUG: Check if any element is missing
+    // if (!totalPriceInput || !paymentMethodSelect) {
+    //   console.error(
+    //     "[PDF Gen] CRITICAL ERROR: Missing DOM elements! Check your IDs ('summary-total-price', etc.)",
+    //   );
+    // }
 
-    const projectName = projectSelect.options[projectSelect.selectedIndex].text;
-    const clientName = clientNameInput.value;
-    const propertyType =
-      propertyTypeSelect.options[propertyTypeSelect.selectedIndex].text;
-    const unitNumber =
-      itemFilterSelect.options[itemFilterSelect.selectedIndex].text;
-    const condition =
-      paymentMethodSelect.options[paymentMethodSelect.selectedIndex].text;
-    const grossArea = grossAreaInput.value;
-    const totalPriceRaw = parseCurrency(totalPriceInput.value);
+    // const projectName = projectSelect.options[projectSelect.selectedIndex].text;
+    // const clientName = clientNameInput.value;
+    // const propertyType =
+    //   propertyTypeSelect.options[propertyTypeSelect.selectedIndex].text;
+    // const unitNumber =
+    //   itemFilterSelect.options[itemFilterSelect.selectedIndex].text;
+    // const condition =
+    //   paymentMethodSelect.options[paymentMethodSelect.selectedIndex].text;
+    // const grossArea = grossAreaInput.value;
+    // const totalPriceRaw = parseCurrency(totalPriceInput.value);
 
-    const dpPercent = parseCurrency(downPaymentPercInput.value);
-    const dpAmount = (totalPriceRaw * dpPercent) / 100;
-    const possAmountRaw = parseCurrency(possessionAmtInput.value);
-    const remainingBalance = totalPriceRaw - dpAmount - possAmountRaw;
+    // const dpPercent = parseCurrency(downPaymentPercInput.value);
+    // const dpAmount = (totalPriceRaw * dpPercent) / 100;
+    // const possAmountRaw = parseCurrency(possessionAmtInput.value);
+    // const remainingBalance = totalPriceRaw - dpAmount - possAmountRaw;
 
-    const currentCalculations = {
-      projectName,
-      clientName,
-      propertyType,
-      unitNumber,
-      condition,
-      netArea: grossArea,
-      totalPrice: formatCurrency(totalPriceRaw),
-      numberOfInstallments: parseInt(installmentsInput.value) || 0,
-      monthlyInstallment: installmentAmtInput.value,
-      downPaymentPercent: dpPercent,
-      downPayment: formatCurrency(dpAmount),
-      possessionPercent: parseCurrency(possessionPercInput.value),
-      possessionAmount: possessionAmtInput.value,
-      remainingAmount: formatCurrency(remainingBalance),
-    };
+    // const currentCalculations = {
+    //   projectName,
+    //   clientName,
+    //   propertyType,
+    //   unitNumber,
+    //   condition,
+    //   netArea: grossArea,
+    //   totalPrice: formatCurrency(totalPriceRaw),
+    //   numberOfInstallments: parseInt(installmentsInput.value) || 0,
+    //   monthlyInstallment: installmentAmtInput.value,
+    //   downPaymentPercent: dpPercent,
+    //   downPayment: formatCurrency(dpAmount),
+    //   possessionPercent: parseCurrency(possessionPercInput.value),
+    //   possessionAmount: possessionAmtInput.value,
+    //   remainingAmount: formatCurrency(remainingBalance),
+    // };
+
+    // 1. Gather Data from DOM
+const projectSelect = document.getElementById("project-name");
+const clientNameInput = document.getElementById("client-name");
+const propertyTypeSelect = document.getElementById("property-type");
+const itemFilterSelect = document.getElementById("property-item");
+const paymentMethodSelect = document.getElementById("payment-condition");
+const grossAreaInput = document.getElementById("gross-area");
+
+// These are DIVs in your HTML, use .innerText or .textContent
+const totalPriceDiv = document.getElementById("summary-total-price");
+const installmentsDiv = document.getElementById("summary-installments-no");
+const downPaymentDiv = document.getElementById("summary-downpayment");
+const possessionAmtDiv = document.getElementById("summary-possession-amount");
+const installmentAmtDiv = document.getElementById("summary-remaining"); 
+const monthlyInstallmentDiv = document.getElementById("summary-installment"); // For the recurring amount
+
+// Input percentages for calculation
+const downPaymentPercInput = document.getElementById("downpayment-percentage");
+const possessionPercSelect = document.getElementById("possession-percentage");
+
+// Get raw text/values
+const projectName = projectSelect.options[projectSelect.selectedIndex].text;
+const clientName = clientNameInput.value;
+const propertyType = propertyTypeSelect.options[propertyTypeSelect.selectedIndex].text;
+const unitNumber = itemFilterSelect.options[itemFilterSelect.selectedIndex].text;
+const condition = paymentMethodSelect.options[paymentMethodSelect.selectedIndex].text;
+const grossArea = grossAreaInput.value;
+
+// FIX: Use .innerText for DIV elements
+const numberOfInstallments = parseInt(installmentsDiv.innerText) || 0;
+const totalPriceRaw = parseCurrency(totalPriceDiv.innerText);
+const dpAmount = parseCurrency(downPaymentDiv.innerText);
+const possAmountRaw = parseCurrency(possessionAmtDiv.innerText);
+const remainingBalance = parseCurrency(installmentAmtDiv.innerText);
+const monthlyAmt = monthlyInstallmentDiv.innerText;
+
+console.log(`[PDF Gen] Fixed! Installments detected: ${numberOfInstallments}`);
+
+// Prepare the Main Data Object
+const currentCalculations = {
+    projectName: projectName,
+    clientName: clientName,
+    propertyType: propertyType,
+    unitNumber: unitNumber,
+    condition: condition,
+    mode: 'custom-area',
+    netArea: grossArea,
+    totalPrice: formatCurrency(totalPriceRaw),
+    numberOfInstallments: numberOfInstallments,
+    monthlyInstallment: monthlyAmt, 
+    downPaymentPercent: parseCurrency(downPaymentPercInput.value),
+    downPayment: formatCurrency(dpAmount),
+    possessionPercent: parseCurrency(possessionPercSelect.value),
+    possessionAmount: formatCurrency(possAmountRaw),
+    remainingAmount: formatCurrency(remainingBalance)
+};
 
     console.log(
       "[PDF Gen] Current Calculations Data Object:",

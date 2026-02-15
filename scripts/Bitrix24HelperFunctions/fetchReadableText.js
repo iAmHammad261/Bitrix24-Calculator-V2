@@ -1,9 +1,9 @@
 import { callBX24Method } from "./callBX24Method.js"
 
-export const fetchReadableText = (propertyId) => {
+export const fetchReadableText = async (propertyId) => {
 
     try{
-     const value = callBX24Method("catalog.productPropertyEnum.get", { id: propertyId })
+     const value =  await callBX24Method("catalog.productPropertyEnum.get", { id: propertyId })
      return value;
     }
     catch(error){

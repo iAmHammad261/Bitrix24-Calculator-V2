@@ -7,6 +7,7 @@ import { unhideFilterFields } from "./scripts/changeVisibiltyOfFilterFeilds/unhi
 import { changeTheFinanceFields } from "./scripts/changeFields.js/changeTheFinanceFeilds.js";
 import { createTableOfInstallments } from "./scripts/CreateTableOfInstallments/createTableOfInstallments.js";
 import { generatePDFOfSummary } from "./scripts/generatePDF/generatePDF.js";
+import { getPlacementInfo } from "./scripts/Bitrix24HelperFunctions/getPlacementInfo.js";
 import { attachFileToLead } from "./scripts/attachFileToLead/attachFileToLead.js";
 
 // A simple console log to verify connection
@@ -88,13 +89,19 @@ const attachPDFToLead = async () => {
 
     console.log("[Attach PDF] Starting process to attach PDF to Lead...");
 
-    const pdfDoc = await generatePDFOfSummary();
+    const leadID = getPlacementInfo()['options']['ID'];
 
-    // convert to base64 String
-    const fullDataUri = await pdfDoc.output('datauristring');
-    const base64String = fullDataUri.split(',')[1]; 
+    console.log(`[Attach PDF] Retrieved Lead ID from placement info: ${leadID}`);   
+
     
-    await attachFileToLead(leadId, base64String);
+
+    // const pdfDoc = await generatePDFOfSummary();
+
+    // // convert to base64 String
+    // const fullDataUri = await pdfDoc.output('datauristring');
+    // const base64String = fullDataUri.split(',')[1]; 
+    
+    // await attachFileToLead(leadId, base64String);
 
 }
 

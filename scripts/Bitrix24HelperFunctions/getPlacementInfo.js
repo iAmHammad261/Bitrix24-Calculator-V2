@@ -1,4 +1,4 @@
-export const getPlacementInfo = async () => {
+export const getPlacementInfo = () => {
     try {
         const placementInfo = BX24.placement.info();
         return placementInfo;

@@ -451,7 +451,8 @@ const currentCalculations = {
     });
 
     console.log("[PDF Gen] Saving PDF...");
-    doc.save("summary.pdf");
+    
+    return doc;
     console.log("[PDF Gen] Success!");
   } catch (err) {
     console.error("[PDF Gen] FATAL ERROR during generation:", err);

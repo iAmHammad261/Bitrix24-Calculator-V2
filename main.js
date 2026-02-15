@@ -7,6 +7,7 @@ import { unhideFilterFields } from "./scripts/changeVisibiltyOfFilterFeilds/unhi
 import { changeTheFinanceFields } from "./scripts/changeFields.js/changeTheFinanceFeilds.js";
 import { createTableOfInstallments } from "./scripts/CreateTableOfInstallments/createTableOfInstallments.js";
 import { generatePDFOfSummary } from "./scripts/generatePDF/generatePDF.js";
+import { attachFileToLead } from "./scripts/attachFileToLead/attachFileToLead.js";
 
 // A simple console log to verify connection
 console.log('Script loaded successfully from the scripts folder!');
@@ -26,6 +27,7 @@ const downPaymentPercentageSelect = document.getElementById("downpayment-percent
 const onPossessionPercentageSelect = document.getElementById("possession-percentage");
 const installmentPlanSelect = document.getElementById("installment-duration");
 const downloadButtonSelect = document.getElementById("menu-download-pdf");
+const attachPDFButtonSelect = document.getElementById("menu-attach-lead");
 
 const handleFilterChange = async () => {
     const filters = {
@@ -77,6 +79,22 @@ const handlechangeOfFinanceValues = () => {
    createTableOfInstallments();
 }
 
+const downloadPDFSummary = async () => {
+    const pdfDoc = await generatePDFOfSummary();
+    pdfDoc.save("summary.pdf");
+}
+
+const attachPDFToLead = async () => {
+    const pdfDoc = await generatePDFOfSummary();
+
+    // convert to base64 String
+    const fullDataUri = await pdfDoc.output('datauristring');
+    const base64String = fullDataUri.split(',')[1]; 
+    
+    await attachFileToLead(leadId, base64String);
+
+}
+
 
 
 projectSelect.addEventListener('change', handleFilterChange);
@@ -95,7 +113,11 @@ onPossessionPercentageSelect.addEventListener('change', handlechangeOfFinanceVal
 
 installmentPlanSelect.addEventListener('change', handlechangeOfFinanceValues);
 
-downloadButtonSelect.addEventListener('click', generatePDFOfSummary);
+downloadButtonSelect.addEventListener('click', downloadPDFSummary);
+
+attachPDFButtonSelect.addEventListener('click', attachPDFToLead);
+
+
 
 
 

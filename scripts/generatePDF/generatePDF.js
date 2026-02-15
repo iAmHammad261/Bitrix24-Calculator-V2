@@ -253,6 +253,8 @@ const currentCalculations = {
       console.warn("[PDF Gen] Skipping Project Image due to error");
     }
 
+    currentY += 80 + 25;
+
         const detailsY = currentY;
     const colWidth = (pageW - 40) / 2;
     doc.setFontSize(16).setFont('helvetica', 'bold').setTextColor(pciBlue);

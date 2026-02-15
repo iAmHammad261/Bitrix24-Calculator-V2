@@ -23,7 +23,7 @@ const blobToBase64 = (blob) => {
 };
 
 export const attachFileToLead = async (leadId, file) => {
-  const FILE_FIELD = "UF_CRM_1758688640"; // Ensure case sensitivity matches your B24 settings
+  const FILE_FIELD = "ufCrm_1758688640" // Ensure case sensitivity matches your B24 settings
   const ENTITY_TYPE_ID = 1; // 1 = Lead
 
   console.log(`[attachFileToLead] 🚀 Starting upload for Lead ID: ${leadId}`);

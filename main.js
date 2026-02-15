@@ -91,11 +91,13 @@ const attachPDFToLead = async () => {
 
   const file = await generatePDFOfSummary();
 
-  const pdfBlob = file.output("blob");
+  const pdfBlob = doc.output("blob");
 
-  pdfBlob.name = `Payment-Plan-${leadID}.pdf`;
+  // 2. Give the blob a name property so attachFileToLead can find it
+  const fileName = `Payment-Plan-${leadID}.pdf`;
+  const fileFile = new File([pdfBlob], fileName, { type: "application/pdf" });
 
-  await attachFileToLead(leadID, pdfBlob);
+  await attachFileToLead(leadID, fileFile);
 
   console.log(`[Attach PDF] Retrieved Lead ID from placement info: ${leadID}`);
 

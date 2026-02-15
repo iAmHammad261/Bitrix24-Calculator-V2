@@ -141,11 +141,13 @@ const productData = await getTheProductData(itemFilterSelect.value);
 console.log("[PDF Gen] Fetched Product Data:", productData);
 
 // get the property type:
-const { PROPERTY_177: propertyTypeValue, PROPERTY_139: categoryTypeValue } = productData || {};
+const { PROPERTY_177: propertyTypeValue, PROPERTY_139: categoryTypeValue, PROPERTY_135: floorTypeValue } = productData || {};
 
 // get the value of the properties:
 const propertyTypeID = propertyTypeValue ? propertyTypeValue.value : null;
 const categoryID = categoryTypeValue ? categoryTypeValue.value : null;
+const floorValue = floorTypeValue ? floorTypeValue.value : null;
+
 
 console.log(`[PDF Gen] Property Type ID: ${propertyTypeID} | Category ID: ${categoryID}`);
 
@@ -153,7 +155,11 @@ const propertyTypeText = propertyTypeID ? await fetchReadableText(propertyTypeID
 
 const categoryTypeText = categoryID ? await fetchReadableText(categoryID): "N/A";
 
-console.log(`[PDF Gen] Resolved Property Type: ${propertyTypeText} | Resolved Category: ${categoryTypeText}`);
+const floorTypeText = floorValue ? await fetchReadableText(floorValue) : "N/A";
+
+
+
+console.log(`[PDF Gen] Resolved Property Type: ${propertyTypeText} | Resolved Category: ${categoryTypeText} | Resolved Floor: ${floorTypeText }`);
 
 
 
@@ -172,6 +178,7 @@ const currentCalculations = {
     clientName: clientName,
     propertyType: propertyTypeText,
     categoryType: categoryTypeText,
+    floorType: floorTypeText,
     unitNumber: unitNumber,
     condition: condition,
     mode: 'custom-area',
@@ -317,6 +324,7 @@ const currentCalculations = {
         `Unit Number: ${currentCalculations.unitNumber}`,
         `Type: ${currentCalculations.propertyType}`, 
         `Category: ${currentCalculations.categoryType}`,
+        `Floor: ${currentCalculations.floorType}`,
         `Total Area: ${currentCalculations.mode === 'custom-area' ? currentCalculations.netArea : currentCalculations.plotSize}`,
         // `Base Rate (SQ/FT): ${currentCalculations.perSqFtPrice}` // Added Base Rate field
     ];

@@ -35,12 +35,12 @@ export const generatePDFOfSummary = async () => {
     const itemFilterSelect = document.getElementById("property-item");
     const paymentMethodSelect = document.getElementById("payment-condition");
     const grossAreaInput = document.getElementById("gross-area");
-    const totalPriceInput = document.getElementById("total-price");
-    const installmentsInput = document.getElementById("number-of-installments");
-    const downPaymentPercInput = document.getElementById("downpayment-percentage");
+    const totalPriceInput = document.getElementById("summary-total-price");
+    const installmentsInput = document.getElementById("summary-installments-no");
+    const downPaymentPercInput = document.getElementById("summary-downpayment");
     const possessionPercInput = document.getElementById("possession-percentage");
-    const possessionAmtInput = document.getElementById("possession-amount");
-    const installmentAmtInput = document.getElementById("installment-amount");
+    const possessionAmtInput = document.getElementById("summary-possession-amount");
+    const installmentAmtInput = document.getElementById("summary-remaining");
 
     // Get raw text/values
     const projectName = projectSelect.options[projectSelect.selectedIndex].text;

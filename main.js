@@ -85,6 +85,9 @@ const downloadPDFSummary = async () => {
 }
 
 const attachPDFToLead = async () => {
+
+    console.log("[Attach PDF] Starting process to attach PDF to Lead...");
+
     const pdfDoc = await generatePDFOfSummary();
 
     // convert to base64 String

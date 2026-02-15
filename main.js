@@ -44,6 +44,7 @@ const handleFilterChange = async () => {
 }
 
 const handleItemChange = async () => {
+    downloadButtonSelect.disabled = false;
     const selectedItemId = itemFilterSelect.value;
     await changeTheItemFields(selectedItemId);
     changeTheFinanceFields();

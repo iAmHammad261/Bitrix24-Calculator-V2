@@ -138,6 +138,8 @@ const monthlyAmt = monthlyInstallmentDiv.innerText;
 
 const productData = await getTheProductData(itemFilterSelect.value);
 
+console.log("[PDF Gen] Fetched Product Data:", productData);
+
 // get the property type:
 const { PROPERTY_177: propertyTypeValue, PROPERTY_139: categoryTypeValue } = productData || {};
 

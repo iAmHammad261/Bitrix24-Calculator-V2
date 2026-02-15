@@ -91,6 +91,10 @@ const attachPDFToLead = async () => {
 
     const leadID = getPlacementInfo()['options']['ID'];
 
+    const file = await generatePDFOfSummary();
+
+    attachFileToLead(leadID, file);
+
     console.log(`[Attach PDF] Retrieved Lead ID from placement info: ${leadID}`);   
 
     

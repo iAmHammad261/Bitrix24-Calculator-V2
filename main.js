@@ -135,7 +135,7 @@ export const attachPDFToLead = async () => {
     // 2. PDF Generation
     const doc = await generatePDFOfSummary();
     const pdfBlob = doc.output("blob");
-    const fileName = `Payment-Plan-${leadId}.pdf`;
+    const fileName = `Payment-Plan-${leadId}-${new Date().toISOString().slice(0, 10)}.pdf`;
 
     // --- INTEGRATED LINE START ---
     // Creating a formal File object to ensure correct MIME type and naming

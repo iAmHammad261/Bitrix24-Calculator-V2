@@ -84,30 +84,85 @@ const downloadPDFSummary = async () => {
   pdfDoc.save("summary.pdf");
 };
 
-const attachPDFToLead = async () => {
-  console.log("[Attach PDF] Starting process to attach PDF to Lead...");
+// const attachPDFToLead = async () => {
 
-  const leadID = getPlacementInfo()["options"]["ID"];
+//   console.log("[Attach PDF] Starting process to attach PDF to Lead...");
 
-  const file = await generatePDFOfSummary();
+//   const leadID = getPlacementInfo()["options"]["ID"];
 
-  const pdfBlob = file.output("blob");
+//   const file = await generatePDFOfSummary();
 
-  // 2. Give the blob a name property so attachFileToLead can find it
-  const fileName = `Payment-Plan-${leadID}.pdf`;
-  const fileFile = new File([pdfBlob], fileName, { type: "application/pdf" });
+//   const pdfBlob = file.output("blob");
 
-  await attachFileToLead(leadID, fileFile);
+//   // 2. Give the blob a name property so attachFileToLead can find it
+//   const fileName = `Payment-Plan-${leadID}.pdf`;
+//   const fileFile = new File([pdfBlob], fileName, { type: "application/pdf" });
 
-  console.log(`[Attach PDF] Retrieved Lead ID from placement info: ${leadID}`);
+//   await attachFileToLead(leadID, fileFile);
 
-  // const pdfDoc = await generatePDFOfSummary();
+//   console.log(`[Attach PDF] Retrieved Lead ID from placement info: ${leadID}`);
 
-  // // convert to base64 String
-  // const fullDataUri = await pdfDoc.output('datauristring');
-  // const base64String = fullDataUri.split(',')[1];
+//   // const pdfDoc = await generatePDFOfSummary();
 
-  // await attachFileToLead(leadId, base64String);
+//   // // convert to base64 String
+//   // const fullDataUri = await pdfDoc.output('datauristring');
+//   // const base64String = fullDataUri.split(',')[1];
+
+//   // await attachFileToLead(leadId, base64String);
+// };
+
+export const attachPDFToLead = async () => {
+  const attachBtn = document.getElementById("menu-attach-lead");
+  const originalContent = attachBtn.innerHTML;
+
+  // 1. UI: Start Processing
+  attachBtn.disabled = true;
+  attachBtn.classList.remove('bg-pci-gold', 'hover:bg-white', 'text-pci-blue');
+  attachBtn.classList.add('bg-gray-400', 'text-white', 'cursor-wait');
+  attachBtn.innerHTML = `
+    <svg class="animate-spin h-5 w-5 mr-3 text-white inline" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
+      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+    Attaching...
+  `;
+
+  try {
+    const placementInfo = BX24.placement.info();
+    const leadId = Number(placementInfo?.options?.ID);
+    if (!leadId) throw new Error("Missing Lead ID");
+
+    // 2. PDF Generation
+    const doc = await generatePDFOfSummary();
+    const pdfBlob = doc.output("blob");
+    const fileName = `Payment-Plan-${leadId}.pdf`;
+
+    // --- INTEGRATED LINE START ---
+    // Creating a formal File object to ensure correct MIME type and naming
+    const fileFile = new File([pdfBlob], fileName, { type: "application/pdf" });
+    // --- INTEGRATED LINE END ---
+
+    // 3. Execution (Passing the formal File object)
+    await attachFileToLead(leadId, fileFile);
+
+    // 4. UI: Success State (Green)
+    attachBtn.classList.replace('bg-gray-400', 'bg-green-600');
+    attachBtn.innerHTML = "✅ Successfully Attached!";
+
+  } catch (error) {
+    // 5. UI: Error State (Red)
+    console.error("Attachment failed:", error);
+    attachBtn.classList.replace('bg-gray-400', 'bg-red-600');
+    attachBtn.innerHTML = "❌ Error: Try Again";
+  } finally {
+    // 6. Reset: Restore button after 3 seconds
+    setTimeout(() => {
+      attachBtn.disabled = false;
+      attachBtn.innerHTML = originalContent;
+      attachBtn.classList.remove('bg-green-600', 'bg-red-600', 'bg-gray-400', 'text-white', 'cursor-wait');
+      attachBtn.classList.add('bg-pci-gold', 'text-pci-blue', 'hover:bg-white');
+    }, 3000);
+  }
 };
 
 projectSelect.addEventListener("change", handleFilterChange);

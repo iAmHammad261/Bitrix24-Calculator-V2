@@ -147,8 +147,14 @@ const { PROPERTY_177: propertyTypeValue, PROPERTY_139: categoryTypeValue } = pro
 const propertyTypeID = propertyTypeValue ? propertyTypeValue.value : null;
 const categoryID = categoryTypeValue ? categoryTypeValue.value : null;
 
+console.log(`[PDF Gen] Property Type ID: ${propertyTypeID} | Category ID: ${categoryID}`);
+
 const propertyTypeText = propertyTypeID ? await fetchReadableText(propertyTypeID).value : "N/A";
+
+
 const categoryTypeText = categoryID ? await fetchReadableText(categoryID).value : "N/A";
+
+console.log(`[PDF Gen] Resolved Property Type: ${propertyTypeText} | Resolved Category: ${categoryTypeText}`);
 
 
 

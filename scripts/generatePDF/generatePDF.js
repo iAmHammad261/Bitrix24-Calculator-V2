@@ -253,6 +253,38 @@ const currentCalculations = {
       console.warn("[PDF Gen] Skipping Project Image due to error");
     }
 
+        const detailsY = currentY;
+    const colWidth = (pageW - 40) / 2;
+    doc.setFontSize(16).setFont('helvetica', 'bold').setTextColor(pciBlue);
+    doc.text('Project Details', 15, detailsY);
+    doc.setFontSize(11).setFont('helvetica', 'normal').setTextColor(textDark);
+    
+    // --- UPDATED PROJECT DETAILS (Removed Location & Handover) ---
+    const projectDetails = [
+        `Project: ${currentCalculations.projectName}`, 
+        `Unit Type: ${currentCalculations.propertyType}`, 
+        `Payment Plan: ${currentCalculations.condition}`
+    ];
+    
+    projectDetails.forEach((line, index) => doc.text(line, 15, detailsY + 12 + (index * 6)));
+
+    const dividerX = 15 + colWidth + 10;
+    doc.setDrawColor(pciBlue).setLineWidth(0.5).line(dividerX, detailsY - 5, dividerX, detailsY + 40);
+    doc.setFontSize(16).setFont('helvetica', 'bold').setTextColor(pciBlue);
+    doc.text('Unit Details', dividerX + 10, detailsY);
+    doc.setFontSize(11).setFont('helvetica', 'normal').setTextColor(textDark);
+    
+    // --- UPDATED UNIT DETAILS (Removed Bed/Bath/Loc/Handover, Updated Floor/Type, Added Base Rate) ---
+    const unitDetails = [
+        `Unit Number: ${currentCalculations.unitNumber}`,
+        `Floor / Type: ${currentCalculations.propertyType}`, 
+        `Total Area: ${currentCalculations.mode === 'custom-area' ? currentCalculations.netArea : currentCalculations.plotSize}`,
+        // `Base Rate (SQ/FT): ${currentCalculations.perSqFtPrice}` // Added Base Rate field
+    ];
+    // --------------------------------------------------------------------------------------------------
+
+    unitDetails.forEach((line, index) => doc.text(line, dividerX + 10, detailsY + 12 + (index * 6)));
+
     // --- PAGE 2: SUMMARY & SCHEDULE ---
     console.log("[PDF Gen] Drawing Page 2...");
     doc.addPage();

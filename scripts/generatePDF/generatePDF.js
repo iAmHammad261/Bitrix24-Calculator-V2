@@ -1,3 +1,7 @@
+import { getTheProductData } from "../Bitrix24HelperFunctions/getTheProductData.js";
+import { fetchReadableText } from "../Bitrix24HelperFunctions/fetchReadableText.js";
+
+
 // Helper: Converts image URL to Base64 for PDF embedding
 async function imageToBase64(url) {
   console.log(`[ImageHelper] Converting to Base64: ${url}`);
@@ -93,6 +97,8 @@ export const generatePDFOfSummary = async () => {
     //   remainingAmount: formatCurrency(remainingBalance),
     // };
 
+    
+
     // 1. Gather Data from DOM
 const projectSelect = document.getElementById("project-name");
 const clientNameInput = document.getElementById("client-name");
@@ -129,13 +135,36 @@ const possAmountRaw = parseCurrency(possessionAmtDiv.innerText);
 const remainingBalance = parseCurrency(installmentAmtDiv.innerText);
 const monthlyAmt = monthlyInstallmentDiv.innerText;
 
+
+const productData = await getTheProductData(itemFilterSelect.value);
+
+// get the property type:
+const { PROPERTY_177: propertyTypeValue, PROPERTY_139: categoryTypeValue } = productData || {};
+
+// get the value of the properties:
+const propertyTypeID = propertyTypeValue ? propertyTypeValue.value : null;
+const categoryID = categoryTypeValue ? categoryTypeValue.value : null;
+
+const propertyTypeText = propertyTypeID ? await fetchReadableText(propertyTypeID) : "N/A";
+const categoryTypeText = categoryID ? await fetchReadableText(categoryID) : "N/A";
+
+
+
+
+
+
+
+
 console.log(`[PDF Gen] Fixed! Installments detected: ${numberOfInstallments}`);
+
+
 
 // Prepare the Main Data Object
 const currentCalculations = {
     projectName: projectName,
     clientName: clientName,
-    propertyType: propertyType,
+    propertyType: propertyTypeText,
+    categoryType: categoryTypeText,
     unitNumber: unitNumber,
     condition: condition,
     mode: 'custom-area',
@@ -279,7 +308,8 @@ const currentCalculations = {
     // --- UPDATED UNIT DETAILS (Removed Bed/Bath/Loc/Handover, Updated Floor/Type, Added Base Rate) ---
     const unitDetails = [
         `Unit Number: ${currentCalculations.unitNumber}`,
-        `Floor / Type: ${currentCalculations.propertyType}`, 
+        `Type: ${currentCalculations.propertyType}`, 
+        `Category: ${currentCalculations.categoryType}`,
         `Total Area: ${currentCalculations.mode === 'custom-area' ? currentCalculations.netArea : currentCalculations.plotSize}`,
         // `Base Rate (SQ/FT): ${currentCalculations.perSqFtPrice}` // Added Base Rate field
     ];

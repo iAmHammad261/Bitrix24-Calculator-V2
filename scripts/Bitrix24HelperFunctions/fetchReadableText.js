@@ -7,8 +7,9 @@ export const fetchReadableText = async (propertyId) => {
     try{
      const value =  await callBX24Method("catalog.productPropertyEnum.get", { id: propertyId })
 
-        console.log(`[fetchReadableText] Fetched Readable Text: ${value ? value.value : "N/A"}`);
-     return value;
+     console.log(`[fetchReadableText] Received value from BX24:`, value);
+
+     return value.productPropertyEnum.value;
     }
     catch(error){
         console.error("Error fetching readable text:", error);

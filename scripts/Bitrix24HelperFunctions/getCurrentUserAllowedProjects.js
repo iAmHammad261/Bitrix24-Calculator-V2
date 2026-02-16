@@ -4,7 +4,7 @@ export const getCurrentUserAllowedProjects = async () => {
 
 const currentUserProjectsRawData = await callBX24Method("user.current", {});
 
-  const currentUserProjectsData = currentUserProjectsRawData.data();  
+  const currentUserProjectsData = currentUserProjectsRawData;  
 
   // fetch the "UF_USR_1768305467962" field from the current user data, which contains the allowed projects for the user
   const currentUserProjectArray =

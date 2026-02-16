@@ -16,7 +16,7 @@ const currentUserProjectsRawData = await callBX24Method("user.current", {});
       filter: { ID: 489 },
     });
 
-    const projectArrayData = projectArrayRawData.data();
+    const projectArrayData = projectArrayRawData;
     const projectArrayList = projectArrayData[0]["LIST"];
 
     const allowedProjects = projectArrayList

@@ -2,6 +2,7 @@ import { getProjectList } from "../Bitrix24HelperFunctions/getProjectList.js";
 import { getPlacementInfo } from "../Bitrix24HelperFunctions/getPlacementInfo.js";
 import { getLeadData } from "../Bitrix24HelperFunctions/getLeadData.js";
 import { getListProperties } from "../Bitrix24HelperFunctions/getTheListProperties.js";
+import { getCurrentUserAllowedProjects } from "../Bitrix24HelperFunctions/getCurrentUserAllowedProjects.js";
 
 
 export const populateFilters = async () => {
@@ -15,6 +16,14 @@ const CATEGORY_PROPERTY_ID = 139;
 
   try {
     const projectList = await getProjectList();
+    const allowedProjects = await getCurrentUserAllowedProjects();
+
+    // Filter the project list based on the allowed projects for the current user
+    if (allowedProjects) {
+      projectList.productPropertyEnums = projectList.productPropertyEnums.filter((project) =>
+        allowedProjects.includes(project.value)
+      );
+    }
 
     // Clear the "Loading..." message
     projectSelect.innerHTML = "";

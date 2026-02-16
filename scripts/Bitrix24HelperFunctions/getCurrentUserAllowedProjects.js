@@ -1,4 +1,4 @@
-import { getCurrentUser } from "./getCurrentUser.js";
+// import { getCurrentUser } from "./getCurrentUser.js";
 import { callBX24Method } from "./callBX24Method.js";
 export const getCurrentUserAllowedProjects = async () => {
 

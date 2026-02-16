@@ -16,14 +16,9 @@ const CATEGORY_PROPERTY_ID = 139;
 
   try {
     const projectList = await getProjectList();
-    const allowedProjects = await getCurrentUserAllowedProjects();
+  
 
-    // Filter the project list based on the allowed projects for the current user
-    if (allowedProjects) {
-      projectList.productPropertyEnums = projectList.productPropertyEnums.filter((project) =>
-        allowedProjects.includes(project.value)
-      );
-    }
+    
 
     // Clear the "Loading..." message
     projectSelect.innerHTML = "";

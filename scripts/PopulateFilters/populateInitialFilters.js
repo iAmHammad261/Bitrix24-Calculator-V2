@@ -16,31 +16,38 @@ const CATEGORY_PROPERTY_ID = 139;
 
   try {
     const projectList = await getProjectList();
-  
 
-    
+    const allowedProjects = await getCurrentUserAllowedProjects();
 
-    // Clear the "Loading..." message
     projectSelect.innerHTML = "";
 
-    // Add a default blank option
-    const defaultOpt = document.createElement("option");
-    defaultOpt.value = "";
-    defaultOpt.text = "Select a Project";
-    defaultOpt.className = "text-black";
-    projectSelect.appendChild(defaultOpt);
+// 2. Add a default blank option
+const defaultOpt = document.createElement("option");
+defaultOpt.value = "";
+defaultOpt.text = "Select a Project";
+defaultOpt.className = "text-black";
+projectSelect.appendChild(defaultOpt);
 
-    // Loop through the data you shared
-    projectList.productPropertyEnums.forEach((project) => {
-      const option = document.createElement("option");
-      // We use the 'id' for the value because Bitrix needs IDs for updates
-      option.value = project.id;
-      // We use the 'value' string for the user to see
-      option.text = project.value;
-      option.className = "text-black";
+// 3. Filter the list based on allowed names
+// This assumes allowedProjects is an array of strings like ["Grand Orchard", "Buraq Heights"]
+const filteredEnums = projectList.productPropertyEnums.filter((project) => 
+    allowedProjects.includes(project.value)
+);
 
-      projectSelect.appendChild(option);
-    });
+// 4. Loop through the FILTERED data
+filteredEnums.forEach((project) => {
+    const option = document.createElement("option");
+    
+    // Use the 'id' for the value (for Bitrix/Backend)
+    option.value = project.id;
+    
+    // Use the 'value' string for the display text
+    option.text = project.value;
+    option.className = "text-black";
+
+    projectSelect.appendChild(option);
+});
+
   } catch (error) {
     console.error("Failed to load projects:", error);
     projectSelect.innerHTML =

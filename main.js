@@ -78,13 +78,11 @@ const handlePaymentMethodChange = () => {
 const handlechangeOfFinanceValues = () => {
  if( downPaymentPercentageSelect.value < 30 || downPaymentPercentageSelect.value > 100 ){
     downloadButtonSelect.disabled = true;
-    downloadButtonSelect.classList.add("opacity-50", "cursor-not-allowed", "pointer-events-none");
-    document.getElementById("downpayment-warning").classList.remove("hidden");
+    attachPDFButtonSelect.disabled = true;
  } 
  else {
     downloadButtonSelect.disabled = false;
-    downloadButtonSelect.classList.remove("opacity-50", "cursor-not-allowed", "pointer-events-none");
-    document.getElementById("downpayment-warning").classList.add("hidden");
+    attachPDFButtonSelect.disabled = false;
     changeTheFinanceFields();
     createTableOfInstallments();
  }

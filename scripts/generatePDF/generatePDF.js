@@ -343,7 +343,7 @@ const currentCalculations = {
     
     try{
     const logoBase64 = await imageToBase64(companyLogoUrlSecond);
-    doc.addImage(logoBase64, 'PNG', 15, 12, 50, 15);
+    doc.addImage(logoBase64, 'PNG', 15, 12, 60, 18);
     }
     catch(e){
       console.warn("[PDF Gen] Skipping Company Logo on Page 2 due to error");
@@ -354,7 +354,7 @@ const currentCalculations = {
       .setFontSize(28)
       .setFont("helvetica", "bold")
       .setTextColor("#FFFFFF")
-      .text("Investment Summary", pageW2 - 15, 28, { align: "right" });
+      .text("Investment Summary", pageW2 - 15, 23, { align: "right" });
 
     // Summary Table
     doc.autoTable({

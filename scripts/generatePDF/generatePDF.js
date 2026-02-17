@@ -383,8 +383,8 @@ const currentCalculations = {
     tableBody.push([
       "1",
       `Investment for ${currentCalculations.projectName}\nUnit: ${currentCalculations.unitNumber}`,
-      `${currentCalculations.netArea} sq.ft.`,
-      currentCalculations.totalPrice,
+      `${currentCalculations.netArea} sq. ft.`,
+      `PKR ${currentCalculations.totalPrice}`,
     ]);
 
     const isInstallment = currentCalculations.condition

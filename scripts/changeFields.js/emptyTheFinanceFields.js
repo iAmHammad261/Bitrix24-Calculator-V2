@@ -1,4 +1,4 @@
-export const clearFinanceFields = () => {
+export const emptyFinanceFields = () => {
   const fields = [
     "summary-downpayment",
     "summary-possession-amount",

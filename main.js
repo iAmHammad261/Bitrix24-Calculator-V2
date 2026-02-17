@@ -9,6 +9,8 @@ import { createTableOfInstallments } from "./scripts/CreateTableOfInstallments/c
 import { generatePDFOfSummary } from "./scripts/generatePDF/generatePDF.js";
 import { getPlacementInfo } from "./scripts/Bitrix24HelperFunctions/getPlacementInfo.js";
 import { attachFileToLead } from "./scripts/attachFileToLead/attachFileToLead.js";
+import { destroyInstallmentTable } from "./scripts/CreateTableOfInstallments/destroyTheTableOfInstallment.js";
+import { emptyFinanceFields } from "./scripts/changeFields.js/emptyTheFinanceFields.js";
 // import { disableTheDownloadButton } from "./scripts/changeVisibiltyOfFeilds/disableTheDownloadButton.js";
 
 // A simple console log to verify connection
@@ -81,6 +83,8 @@ const handlechangeOfFinanceValues = () => {
     attachPDFButtonSelect.disabled = true;
     downloadButtonSelect.classList.add("opacity-50", "cursor-not-allowed", "pointer-events-none");
     document.getElementById("downpayment-warning").classList.remove("hidden");
+    emptyFinanceFields();
+    destroyInstallmentTable();
  } 
  else {
     downloadButtonSelect.disabled = false;

@@ -1,5 +1,5 @@
-import { emptyFinanceFields } from "../changeFields.js/emptyTheFinanceFields";
-import { destroyInstallmentTable } from "../CreateTableOfInstallments/destroyTheTableOfInstallment";
+import { emptyFinanceFields } from "../changeFields.js/emptyTheFinanceFields.js";
+import { destroyInstallmentTable } from "../CreateTableOfInstallments/destroyTheTableOfInstallment.js";
 
 export const populateItemFilter = (projectlist) => {
 

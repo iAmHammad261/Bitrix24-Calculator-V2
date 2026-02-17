@@ -2,13 +2,14 @@ import { populateFilters } from "./scripts/PopulateFilters/populateInitialFilter
 import { getTheProductWithFilter } from "./scripts/Bitrix24HelperFunctions/getTheProductWithFilter.js";
 import { populateItemFilter } from "./scripts/PopulateFilters/populateItemFilter.js";
 import { changeTheItemFields } from "./scripts/changeFields.js/changeTheItemFeilds.js";
-import { hideFilterFields } from "./scripts/changeVisibiltyOfFilterFeilds/hideFilterFeilds.js";
-import { unhideFilterFields } from "./scripts/changeVisibiltyOfFilterFeilds/unhideFilterFeilds.js";
+import { hideFilterFields } from "./scripts/changeVisibiltyOfFeilds/hideFilterFeilds.js";
+import { unhideFilterFields } from "./scripts/changeVisibiltyOfFeilds/unhideFilterFeilds.js";
 import { changeTheFinanceFields } from "./scripts/changeFields.js/changeTheFinanceFeilds.js";
 import { createTableOfInstallments } from "./scripts/CreateTableOfInstallments/createTableOfInstallments.js";
 import { generatePDFOfSummary } from "./scripts/generatePDF/generatePDF.js";
 import { getPlacementInfo } from "./scripts/Bitrix24HelperFunctions/getPlacementInfo.js";
 import { attachFileToLead } from "./scripts/attachFileToLead/attachFileToLead.js";
+import { disableTheDownloadButton } from "./scripts/changeVisibiltyOfFeilds/disableTheDownloadButton.js";
 
 // A simple console log to verify connection
 console.log("Script loaded successfully from the scripts folder!");
@@ -75,6 +76,15 @@ const handlePaymentMethodChange = () => {
 
 // handle the change of the downpayment percentage,on possession percentage, and installment plans
 const handlechangeOfFinanceValues = () => {
+ if( downPaymentPercentageSelect.value < 30 || downPaymentPercentageSelect.value > 100 ){
+    downloadButtonSelect.disabled = true;
+    document.getElementById("downpayment-warning").classList.remove("hidden");
+ } 
+ else {
+    downloadButtonSelect.disabled = false;
+    document.getElementById("downpayment-warning").classList.add("hidden");
+ }
+
   changeTheFinanceFields();
   createTableOfInstallments();
 };

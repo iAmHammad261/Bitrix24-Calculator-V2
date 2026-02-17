@@ -196,6 +196,8 @@ itemFilterSelect.addEventListener("change", handleItemChange);
 
 paymentMethodSelect.addEventListener("change", handlePaymentMethodChange);
 
+propertyFloorSelect.addEventListener("change", handleFilterChange);
+
 downPaymentPercentageSelect.addEventListener(
   "input",
   handlechangeOfFinanceValues,

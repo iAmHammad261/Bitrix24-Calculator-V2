@@ -204,7 +204,7 @@ const currentCalculations = {
         logoUrl: "https://i.postimg.cc/FHNNkXGY/River-Courtyard.png",
         imageUrl: "https://i.postimg.cc/nz0Qg1zw/river-Small.png",
       },
-      "Grand Galleria": {
+      "Grand Gallery": {
         logoUrl: "https://i.postimg.cc/QdhhKZS7/Grand-Gallery.png",
         imageUrl: "https://i.postimg.cc/4dBhq1dq/grand-gallery-Small.png",
       },
@@ -235,6 +235,7 @@ const currentCalculations = {
     const assets =
       projectAssets[currentCalculations.projectName] || projectAssets.default;
     const companyLogoUrl = "https://i.postimg.cc/50n359N3/pci-logo-01-01.png";
+    const companyLogoUrlSecond = "https://i.postimg.cc/Y2mc6bX0/Logo-White.png";
 
     // 3. Initialize PDF
     const { jsPDF } = window.jspdf;
@@ -338,6 +339,17 @@ const currentCalculations = {
     const pageW2 = doc.internal.pageSize.getWidth();
 
     doc.setFillColor(pciBlue).rect(0, 0, pageW2, 40, "F");
+
+    
+    try{
+    const logoBase64 = await imageToBase64(companyLogoUrlSecond);
+    doc.addImage(logoBase64, 'PNG', 15, 12, 50, 15);
+    }
+    catch(e){
+      console.warn("[PDF Gen] Skipping Company Logo on Page 2 due to error");
+    }
+    
+
     doc
       .setFontSize(28)
       .setFont("helvetica", "bold")

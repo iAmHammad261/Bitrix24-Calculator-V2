@@ -1,11 +1,18 @@
+import { emptyFinanceFields } from "../changeFields.js/emptyTheFinanceFields";
+import { destroyInstallmentTable } from "../CreateTableOfInstallments/destroyTheTableOfInstallment";
+
 export const populateItemFilter = (projectlist) => {
 
     const itemFilterSelect = document.getElementById("property-item") 
+    const generatePDFButton = document.getElementById("menu-download-pdf");
+    const attachToLeadButton = document.getElementById("menu-attach-lead");
 
     // clear all the options first
     itemFilterSelect.innerHTML = "";
 
     if(!projectlist || projectlist.length === 0){
+
+
         console.warn("No products found to populate item filter.");
         // clear the select options and say no items found
         const itemFilterSelect = document.getElementById("property-item");
@@ -15,6 +22,13 @@ export const populateItemFilter = (projectlist) => {
         defaultOpt.text = "No items found for selected filters";
         defaultOpt.className = "red-500";
         itemFilterSelect.appendChild(defaultOpt);
+
+        // disable the generate PDF and attach to lead buttons since there's no item to select
+        generatePDFButton.disabled = true;
+        attachToLeadButton.disabled = true;
+        emptyFinanceFields();
+        destroyInstallmentTable();
+
         return;
     }
 
@@ -34,5 +48,9 @@ export const populateItemFilter = (projectlist) => {
         option.className = "text-black";
         itemFilterSelect.appendChild(option);
     });
+
+    // enable the generate PDF and attach to lead buttons since there are items to select
+    generatePDFButton.disabled = false;
+    attachToLeadButton.disabled = false;
 
 }

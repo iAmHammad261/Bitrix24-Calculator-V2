@@ -342,7 +342,7 @@ const currentCalculations = {
       .setFontSize(28)
       .setFont("helvetica", "bold")
       .setTextColor("#FFFFFF")
-      .text("Investment Summary", pageW2 - 15, 28, { align: "left" });
+      .text("Investment Summary", pageW2 - 15, 28, { align: "right" });
 
     // Summary Table
     doc.autoTable({

@@ -9,7 +9,7 @@ import { createTableOfInstallments } from "./scripts/CreateTableOfInstallments/c
 import { generatePDFOfSummary } from "./scripts/generatePDF/generatePDF.js";
 import { getPlacementInfo } from "./scripts/Bitrix24HelperFunctions/getPlacementInfo.js";
 import { attachFileToLead } from "./scripts/attachFileToLead/attachFileToLead.js";
-import { disableTheDownloadButton } from "./scripts/changeVisibiltyOfFeilds/disableTheDownloadButton.js";
+// import { disableTheDownloadButton } from "./scripts/changeVisibiltyOfFeilds/disableTheDownloadButton.js";
 
 // A simple console log to verify connection
 console.log("Script loaded successfully from the scripts folder!");

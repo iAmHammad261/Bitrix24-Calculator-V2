@@ -17,6 +17,9 @@ export const getTheProductWithFilter = async (filter) => {
     if (filter.project) {
         filterForProduct['PROPERTY_173'] = filter.project;
     }
+    if(filter.propertyFloor){
+        filterForProduct['PROPERTY_135'] = filter.propertyFloor;
+    }
 
     
 

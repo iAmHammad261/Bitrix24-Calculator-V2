@@ -35,12 +35,14 @@ const onPossessionPercentageSelect = document.getElementById(
 const installmentPlanSelect = document.getElementById("installment-duration");
 const downloadButtonSelect = document.getElementById("menu-download-pdf");
 const attachPDFButtonSelect = document.getElementById("menu-attach-lead");
+const propertyFloorSelect = document.getElementById("property-floor");
 
 const handleFilterChange = async () => {
   const filters = {
     project: projectSelect.value,
     propertyType: propertyTypeSelect.value,
     propertyCategory: propertyCategorySelect.value,
+    propertyFloor: propertyFloorSelect.value
   };
 
   console.log("Current filters:", filters);

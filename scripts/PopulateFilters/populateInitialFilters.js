@@ -9,6 +9,7 @@ export const populateFilters = async () => {
 
 const TYPE_PROPERTY_ID = 177; 
 const CATEGORY_PROPERTY_ID = 139;
+const FLOOR_PROPERTY_ID = 135;
 
   // first fetch the project list and then populate the filters with the project names:
   const projectSelect = document.getElementById("project-name");
@@ -97,7 +98,7 @@ filteredEnums.forEach((project) => {
    
 
    // get the property of the category:
-   const categoryList = await getListProperties(CATEGORY_PROPERTY_ID); // replace with actual property ID
+   const categoryList = await getListProperties(CATEGORY_PROPERTY_ID); 
    
 
    const categorySelect = document.getElementById("property-category");
@@ -122,7 +123,29 @@ filteredEnums.forEach((project) => {
      categorySelect.appendChild(option);
    });
 
+    const floorList = await getListProperties(FLOOR_PROPERTY_ID);
 
+    const floorSelect = document.getElementById("property-floor");
+    if (!floorSelect) return;
+
+    // Clear existing options
+    floorSelect.innerHTML = "";
+
+    // Add a default blank option
+    const defaultOpt3 = document.createElement("option");
+    defaultOpt3.value = "";
+    defaultOpt3.text = "Select a Property Floor";
+    defaultOpt3.className = "text-black";
+    floorSelect.appendChild(defaultOpt3);
+
+    // Populate with the list of property floors
+    floorList.productPropertyEnums.forEach((floor) => {
+      const option = document.createElement("option");
+      option.value = floor.id;
+      option.text = floor.value;
+      option.className = "text-black";
+      floorSelect.appendChild(option);
+    });
 
    
 };

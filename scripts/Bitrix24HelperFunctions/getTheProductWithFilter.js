@@ -6,7 +6,7 @@ export const getTheProductWithFilter = async (filter) => {
     let finish = false;
 
     // 1. Map the user selection to Bitrix Property IDs
-    const filterForProduct = {};
+    const filterForProduct = {'PROPERTY_99': '155'};
     
     if (filter.propertyType) {
         filterForProduct['PROPERTY_177'] = filter.propertyType;

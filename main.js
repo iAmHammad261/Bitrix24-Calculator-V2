@@ -79,10 +79,14 @@ const handlechangeOfFinanceValues = () => {
  if( downPaymentPercentageSelect.value < 30 || downPaymentPercentageSelect.value > 100 ){
     downloadButtonSelect.disabled = true;
     attachPDFButtonSelect.disabled = true;
+    downloadButtonSelect.classList.add("opacity-50", "cursor-not-allowed", "pointer-events-none");
+    document.getElementById("downpayment-warning").classList.remove("hidden");
  } 
  else {
     downloadButtonSelect.disabled = false;
     attachPDFButtonSelect.disabled = false;
+    downloadButtonSelect.classList.remove("opacity-50", "cursor-not-allowed", "pointer-events-none");
+    document.getElementById("downpayment-warning").classList.add("hidden");
     changeTheFinanceFields();
     createTableOfInstallments();
  }

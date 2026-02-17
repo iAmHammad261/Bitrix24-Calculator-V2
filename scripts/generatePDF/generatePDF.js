@@ -403,7 +403,7 @@ const currentCalculations = {
           "",
           `Installment #${i}`,
           "",
-          currentCalculations.monthlyInstallment,
+          `PKR ${currentCalculations.monthlyInstallment}`,
         ]);
       }
     }

@@ -189,12 +189,12 @@ itemFilterSelect.addEventListener("change", handleItemChange);
 paymentMethodSelect.addEventListener("change", handlePaymentMethodChange);
 
 downPaymentPercentageSelect.addEventListener(
-  "change",
+  "input",
   handlechangeOfFinanceValues,
 );
 
 onPossessionPercentageSelect.addEventListener(
-  "change",
+  "input",
   handlechangeOfFinanceValues,
 );
 

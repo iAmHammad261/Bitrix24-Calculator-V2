@@ -104,7 +104,7 @@ const handlechangeOfFinanceValues = () => {
 const downloadPDFSummary = async () => {
   const pdfDoc = await generatePDFOfSummary();
   const projectText = projectSelect.options[projectSelect.selectedIndex].text;
-  const leadData = await getLeadData();
+  const leadData = await getLeadData(getPlacementInfo().options.ID);
   const leadTitle = leadData['TITLE'];
   const leadId = leadData['ID'];
   pdfDoc.save(`${projectText}-${leadTitle}-${leadId}_investment_summary.pdf`);

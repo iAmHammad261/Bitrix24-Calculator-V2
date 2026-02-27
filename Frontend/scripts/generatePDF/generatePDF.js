@@ -232,7 +232,7 @@ const currentCalculations = {
       default: {
         logoUrl: "https://i.postimg.cc/SxkkYbV8/Grand-Orchard.png",
         imageUrl:
-          "https://i.postimg.cc/50nFTm0P/DHA-Orchard-Night-Shot-01-Small.jpg",
+          "https://images.premierchoiceint.online/images/2026/02/27/Sales-Offer-Box-Park-III.jpgcb69ff77704270aa.jpeg",
       },
     };
 
@@ -257,7 +257,7 @@ const currentCalculations = {
 
 
    if(projectName == 'Box Park-3'){
-      const firstPageImageURL = "https://images.premierchoiceint.online/image/jL"
+      const firstPageImageURL = "https://images.premierchoiceint.online/images/2026/02/27/Sales-Offer-Box-Park-III.jpgcb69ff77704270aa.jpeg"
       try {
         const base64OfFirstImage = await imageToBase64(firstPageImageURL);
         doc.addImage(base64OfFirstImage, "JPEG", 0, 0, pageW, pageH);

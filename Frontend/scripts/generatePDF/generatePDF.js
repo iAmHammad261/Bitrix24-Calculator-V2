@@ -230,9 +230,8 @@ const currentCalculations = {
         imageUrl: 'https://i.postimg.cc/bYn99gjn/Sales-Offer-Box-Park-III-jpg.jpg'
       },
       default: {
-        logoUrl: "https://i.postimg.cc/pVjJJCth/sales-offer-Box-Park-3-04.png",
-        imageUrl:
-          "https://i.postimg.cc/bYn99gjn/Sales-Offer-Box-Park-III-jpg.jpg",
+        logoUrl: "https://i.postimg.cc/SxkkYbV8/Grand-Orchard.png",
+        imageUrl: "https://i.postimg.cc/50nFTm0P/DHA-Orchard-Night-Shot-01-Small.jpg"
       },
     };
 

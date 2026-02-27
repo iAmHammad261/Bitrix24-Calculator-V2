@@ -230,9 +230,9 @@ const currentCalculations = {
         imageUrl: 'https://images.premierchoiceint.online/images/2026/02/27/Sales-Offer-Box-Park-III.jpgcb69ff77704270aa.jpeg'
       },
       default: {
-        logoUrl: "https://s3.premierchoiceint.online/sales%20offer%20Box%20Park%203-04.png",
+        logoUrl: "https://i.postimg.cc/pVjJJCth/sales-offer-Box-Park-3-04.png",
         imageUrl:
-          "https://s3.premierchoiceint.online/Sales%20Offer%20Box%20Park%20III.jpg.jpeg",
+          "https://i.postimg.cc/bYn99gjn/Sales-Offer-Box-Park-III-jpg.jpg",
       },
     };
 
@@ -257,7 +257,7 @@ const currentCalculations = {
 
 
    if(projectName == 'Box Park-3'){
-      const firstPageImageURL = "https://s3.premierchoiceint.online/Sales%20Offer%20Box%20Park%20III.jpg.jpeg";
+      const firstPageImageURL = "https://i.postimg.cc/bYn99gjn/Sales-Offer-Box-Park-III-jpg.jpg";
       try {
         const base64OfFirstImage = await imageToBase64(firstPageImageURL);
         doc.addImage(base64OfFirstImage, "JPEG", 0, 0, pageW, pageH);

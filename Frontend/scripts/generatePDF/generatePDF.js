@@ -256,12 +256,15 @@ const currentCalculations = {
     console.log("[PDF Gen] Drawing Page 1...");
 
 
-    if(projectName == 'Box Park-3'){
+   if(projectName == 'Box Park-3'){
       const firstPageImageURL = "https://images.premierchoiceint.online/image/jL"
-
-      const base64OfFirstImage = await imageToBase64(firstPageImageURL);
-      doc.addImage(base64OfFirstImage, "JPEG", 0, 0, pageW, pageH);
-      doc.addPage();
+      try {
+        const base64OfFirstImage = await imageToBase64(firstPageImageURL);
+        doc.addImage(base64OfFirstImage, "JPEG", 0, 0, pageW, pageH);
+        doc.addPage();
+      } catch(e) {
+        console.warn("[PDF Gen] Skipping Box Park-3 image due to CORS/Load error");
+      }
     }
 
     // --- PAGE 1: TITLE PAGE ---

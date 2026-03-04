@@ -1,4 +1,4 @@
-import { changeTheFinanceFields } from "../changeFields.js/changeTheFinanceFeilds";
+import { changeTheFinanceFields } from "../changeFields.js/changeTheFinanceFeilds.js";
 
 export const addBalloonPaymentRow = () => {
 

@@ -1,3 +1,5 @@
+import { changeTheFinanceFields } from "../changeFields.js/changeTheFinanceFeilds";
+
 export const addBalloonPaymentRow = () => {
 
     console.log("Add Balloon Payment button clicked");
@@ -41,6 +43,24 @@ export const addBalloonPaymentRow = () => {
   removeBtn.addEventListener('click', () => {
     row.remove();
     // TODO: Call your calculation update function here later
+  });
+
+  const monthInput = row.querySelector('.balloon-month');
+  const amountInput = row.querySelector('.balloon-amount');
+
+  // 2. Attach 'input' listeners
+  monthInput.addEventListener('input', (event) => {
+    console.log(`Month changed to: ${event.target.value}`);
+    // Call your recalculation functions here
+    changeTheFinanceFields();
+    // createTableOfInstallments();
+  });
+
+  amountInput.addEventListener('input', (event) => {
+    console.log(`Amount changed to: ${event.target.value}`);
+    // Call your recalculation functions here
+    changeTheFinanceFields();
+    // createTableOfInstallments();
   });
   
   // Note: You can also attach 'input' event listeners to .balloon-month and .balloon-amount here later

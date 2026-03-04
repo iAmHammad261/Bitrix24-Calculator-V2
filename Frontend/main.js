@@ -83,7 +83,7 @@ const handlePaymentMethodChange = () => {
 
 // handle the change of the downpayment percentage,on possession percentage, and installment plans
 const handlechangeOfFinanceValues = () => {
- if( downPaymentPercentageSelect.value < 30 || downPaymentPercentageSelect.value > 100 ){
+ if( downPaymentPercentageSelect.value < 5 || downPaymentPercentageSelect.value > 100 ){
     downloadButtonSelect.disabled = true;
     attachPDFButtonSelect.disabled = true;
     downloadButtonSelect.classList.add("opacity-50", "cursor-not-allowed", "pointer-events-none");

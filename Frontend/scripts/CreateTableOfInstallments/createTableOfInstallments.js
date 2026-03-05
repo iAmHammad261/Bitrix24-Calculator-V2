@@ -39,7 +39,7 @@ export const createTableOfInstallments = () => {
 
   balloonPayments.forEach(({ month, amount }) => {
     const deductionPerInstallment = amount / month;
-    for (let i = 1; i < month; i++) {  // i < month excludes row N itself
+    for (let i = 1; i <= month; i++) {  // i < month excludes row N itself
       deductionPerRow[i] = (deductionPerRow[i] || 0) + deductionPerInstallment;
     }
   });

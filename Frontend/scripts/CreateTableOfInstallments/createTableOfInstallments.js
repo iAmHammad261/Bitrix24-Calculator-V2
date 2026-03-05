@@ -3,9 +3,12 @@ export const createTableOfInstallments = () => {
 
   const plan = document.getElementById("payment-condition").value;
   const totalPriceValue = document.getElementById("total-price").value;
-  const downPaymentAmountValue = document.getElementById("downpayment-percentage").value;
-  const onPossessionAmountValues = document.getElementById("possession-percentage").value;
-
+  const downPaymentAmountValue = document.getElementById(
+    "downpayment-percentage",
+  ).value;
+  const onPossessionAmountValues = document.getElementById(
+    "possession-percentage",
+  ).value;
 
   console.log("Total Price Value:", totalPriceValue);
   console.log("Down Payment Amount Value:", downPaymentAmountValue);
@@ -22,22 +25,39 @@ export const createTableOfInstallments = () => {
     currency: "USD",
   });
 
-  const getInstallmentNumber = parseInt(document.getElementById("installment-duration").value) || 0;
-  const summaryInstallmentElement = document.getElementById("summary-installment");
+  const getInstallmentNumber =
+    parseInt(document.getElementById("installment-duration").value) || 0;
+  const summaryInstallmentElement = document.getElementById(
+    "summary-installment",
+  );
   // const installmentPerAmount = parseFloat(
   //   summaryInstallmentElement ? summaryInstallmentElement.textContent.replace(/[^0-9.-]+/g, "") : 0
   // );
-  const installmentPerAmount = parseFloat(Number(totalPriceValue.replace(/[^0-9.-]+/g, "")) - (totalPriceValue * downPaymentAmountValue / 100) - (totalPriceValue * onPossessionAmountValues / 100)) || 0;
+
+  const totalPriceNumeric =
+    parseFloat(totalPriceValue.replace(/[^0-9.-]+/g, "")) || 0;
+  const downPaymentPercent = parseFloat(downPaymentAmountValue) || 0;
+  const onPossessionPercent = parseFloat(onPossessionAmountValues) || 0;
+
+  const installmentPerAmount =
+    totalPriceNumeric -
+    (totalPriceNumeric * downPaymentPercent) / 100 -
+    (totalPriceNumeric * onPossessionPercent) / 100;
 
   // 1. GATHER ALL BALLOON PAYMENTS FROM THE DOM
-  const balloonRows = document.querySelectorAll('.balloon-row');
+  const balloonRows = document.querySelectorAll(".balloon-row");
   console.log(`Found ${balloonRows.length} balloon payment rows in the DOM.`);
 
   const balloonPayments = [];
-  balloonRows.forEach(row => {
-    const monthInput = parseInt(row.querySelector('.balloon-month').value);
-    const amountInput = parseFloat(row.querySelector('.balloon-amount').value);
-    if (!isNaN(monthInput) && monthInput > 0 && !isNaN(amountInput) && amountInput > 0) {
+  balloonRows.forEach((row) => {
+    const monthInput = parseInt(row.querySelector(".balloon-month").value);
+    const amountInput = parseFloat(row.querySelector(".balloon-amount").value);
+    if (
+      !isNaN(monthInput) &&
+      monthInput > 0 &&
+      !isNaN(amountInput) &&
+      amountInput > 0
+    ) {
       balloonPayments.push({ month: monthInput, amount: amountInput });
     }
   });
@@ -71,11 +91,24 @@ export const createTableOfInstallments = () => {
     row.classList.add("bg-white", "border-b", "border-gray-200");
 
     const installmentCell = document.createElement("td");
-    installmentCell.classList.add("px-6", "py-4", "whitespace-nowrap", "text-sm", "text-gray-900", "font-medium");
+    installmentCell.classList.add(
+      "px-6",
+      "py-4",
+      "whitespace-nowrap",
+      "text-sm",
+      "text-gray-900",
+      "font-medium",
+    );
     installmentCell.textContent = `${i}`;
 
     const amountCell = document.createElement("td");
-    amountCell.classList.add("px-6", "py-4", "whitespace-nowrap", "text-sm", "text-gray-900");
+    amountCell.classList.add(
+      "px-6",
+      "py-4",
+      "whitespace-nowrap",
+      "text-sm",
+      "text-gray-900",
+    );
     amountCell.textContent = `${formatter.format(adjustedAmount)}`;
 
     row.appendChild(installmentCell);
@@ -83,17 +116,32 @@ export const createTableOfInstallments = () => {
     tableBody.appendChild(row);
 
     // --- Balloon Payment Row(s) ---
-    const balloonsForThisMonth = balloonPayments.filter(bp => bp.month === i);
+    const balloonsForThisMonth = balloonPayments.filter((bp) => bp.month === i);
     balloonsForThisMonth.forEach((balloon) => {
       const balloonRow = document.createElement("tr");
       balloonRow.classList.add("bg-slate-50", "border-b", "border-gray-300");
 
       const balloonInstallmentCell = document.createElement("td");
-      balloonInstallmentCell.classList.add("px-6", "py-4", "whitespace-nowrap", "text-sm", "text-pci-blue", "font-bold", "italic");
+      balloonInstallmentCell.classList.add(
+        "px-6",
+        "py-4",
+        "whitespace-nowrap",
+        "text-sm",
+        "text-pci-blue",
+        "font-bold",
+        "italic",
+      );
       balloonInstallmentCell.textContent = `${i} - Balloon Payment`;
 
       const balloonAmountCell = document.createElement("td");
-      balloonAmountCell.classList.add("px-6", "py-4", "whitespace-nowrap", "text-sm", "text-pci-blue", "font-bold");
+      balloonAmountCell.classList.add(
+        "px-6",
+        "py-4",
+        "whitespace-nowrap",
+        "text-sm",
+        "text-pci-blue",
+        "font-bold",
+      );
       balloonAmountCell.textContent = `${formatter.format(balloon.amount)}`;
 
       balloonRow.appendChild(balloonInstallmentCell);

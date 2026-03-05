@@ -2,6 +2,9 @@ export const createTableOfInstallments = () => {
   console.log("Creating/updating the installment table...");
 
   const plan = document.getElementById("payment-condition").value;
+  const totalPriceValue = document.getElementById("summary-total-price").value;
+  const downPaymentAmountValue = document.getElementById("summary-downpayment").value;
+  const onPossessionAmountValues = document.getElementById("summary-possession").value;
 
   if (plan == "full") {
     const tableBody = document.getElementById("installment-table-body");
@@ -16,9 +19,12 @@ export const createTableOfInstallments = () => {
 
   const getInstallmentNumber = parseInt(document.getElementById("installment-duration").value) || 0;
   const summaryInstallmentElement = document.getElementById("summary-installment");
-  const installmentPerAmount = parseFloat(
-    summaryInstallmentElement ? summaryInstallmentElement.textContent.replace(/[^0-9.-]+/g, "") : 0
-  );
+  // const installmentPerAmount = parseFloat(
+  //   summaryInstallmentElement ? summaryInstallmentElement.textContent.replace(/[^0-9.-]+/g, "") : 0
+  // );
+  const installmentPerAmount = (parseFloat(
+    Number(totalPriceValue.replace(/[^0-9.-]+/g, "")) - Number(downPaymentAmountValue.replace(/[^0-9.-]+/g, "")) - Number(onPossessionAmountValues.replace(/[^0-9.-]+/g, ""))
+  ) / plan).toFixed(2);
 
   // 1. GATHER ALL BALLOON PAYMENTS FROM THE DOM
   const balloonRows = document.querySelectorAll('.balloon-row');

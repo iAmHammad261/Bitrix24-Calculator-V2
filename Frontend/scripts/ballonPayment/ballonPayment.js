@@ -1,4 +1,5 @@
 import { changeTheFinanceFields } from "../changeFields.js/changeTheFinanceFeilds.js";
+import { createTableOfInstallments } from "../CreateTableOfInstallments/createTableOfInstallments.js";
 
 export const addBalloonPaymentRow = () => {
 

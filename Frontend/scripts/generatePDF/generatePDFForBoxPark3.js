@@ -418,7 +418,6 @@ export const generatePDFOfSummaryForBoxPark3 = async () => {
       margin: { left: 15, right: 15 },
     });
 
-    
     // update currentY so they don't overlap the new table.
     currentY = doc.autoTable.previous.finalY + 15;
 
@@ -473,18 +472,27 @@ export const generatePDFOfSummaryForBoxPark3 = async () => {
         textColor: "#FFFFFF",
         fontSize: 12,
         fontStyle: "bold",
+        halign: "left", // Ensure header "Value" is positioned correctly
       },
       bodyStyles: {
         fontSize: 10,
-        cellPadding: 5,
+        cellPadding: { top: 5, right: 10, bottom: 5, left: 10 }, // Controlled padding
+        textColor: textDark,
       },
       columnStyles: {
-        1: { halign: "right", fontStyle: "bold" }, // Right-align the values
+        0: { halign: "left" }, // Labels stay left
+        1: { halign: "right", fontStyle: "bold" }, // Values stay right and bold
+      },
+      // This explicitly aligns the headers to match the columns below them
+      didParseCell: function (data) {
+        if (data.section === "head" && data.column.index === 1) {
+          data.cell.styles.halign = "right";
+        }
       },
       margin: { left: 15, right: 15 },
-      // This removes the "standard" table borders to look cleaner like the image
       styles: {
         lineWidth: 0,
+        font: "helvetica",
       },
     });
 

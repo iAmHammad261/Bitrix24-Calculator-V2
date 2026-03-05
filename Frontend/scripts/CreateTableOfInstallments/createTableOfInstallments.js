@@ -1,4 +1,8 @@
 export const createTableOfInstallments = () => {
+
+  console.log("Creating/updating the installment table...");
+
+
   const plan = document.getElementById("payment-condition").value;
 
   if (plan == "full") {
@@ -18,6 +22,8 @@ export const createTableOfInstallments = () => {
 
   // 1. GATHER ALL BALLOON PAYMENTS FROM THE DOM
   const balloonRows = document.querySelectorAll('.balloon-row');
+
+  console.log(`Found ${balloonRows.length} balloon payment rows in the DOM.`);
   const balloonPayments = [];
   
   balloonRows.forEach(row => {

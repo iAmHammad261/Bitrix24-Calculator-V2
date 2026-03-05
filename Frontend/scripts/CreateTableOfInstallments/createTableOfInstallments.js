@@ -34,14 +34,19 @@ export const createTableOfInstallments = () => {
   });
 
   // 2. PRE-CALCULATE THE TOTAL DEDUCTION FOR EACH ROW
-  // Each balloon at month N with amount A deducts (A / N) from rows 1 to N-1 independently.
+  // Sort balloons by month, then each balloon's deduction only applies
+  // to rows within its own exclusive range (since the previous balloon).
   const deductionPerRow = {};
+  const sortedBalloons = [...balloonPayments].sort((a, b) => a.month - b.month);
+  let prevMonth = 0;
 
-  balloonPayments.forEach(({ month, amount }) => {
-    const deductionPerInstallment = amount / month;
-    for (let i = 1; i <= month; i++) {  // i < month excludes row N itself
+  sortedBalloons.forEach(({ month, amount }) => {
+    const rangeLength = month - prevMonth;
+    const deductionPerInstallment = amount / rangeLength;
+    for (let i = prevMonth + 1; i <= month; i++) {
       deductionPerRow[i] = (deductionPerRow[i] || 0) + deductionPerInstallment;
     }
+    prevMonth = month;
   });
 
   // 3. BUILD THE TABLE

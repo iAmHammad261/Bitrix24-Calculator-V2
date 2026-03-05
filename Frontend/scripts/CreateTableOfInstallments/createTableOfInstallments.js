@@ -6,6 +6,11 @@ export const createTableOfInstallments = () => {
   const downPaymentAmountValue = document.getElementById("summary-downpayment").value;
   const onPossessionAmountValues = document.getElementById("summary-possession-amount").value;
 
+
+  console.log("Total Price Value:", totalPriceValue);
+  console.log("Down Payment Amount Value:", downPaymentAmountValue);
+  console.log("On Possession Amount Value:", onPossessionAmountValues);
+
   if (plan == "full") {
     const tableBody = document.getElementById("installment-table-body");
     tableBody.innerHTML = "";

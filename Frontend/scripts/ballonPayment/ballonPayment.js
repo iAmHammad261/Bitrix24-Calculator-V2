@@ -60,7 +60,7 @@ export const addBalloonPaymentRow = () => {
     console.log(`Amount changed to: ${event.target.value}`);
     // Call your recalculation functions here
     changeTheFinanceFields();
-    // createTableOfInstallments();
+    createTableOfInstallments();
   });
   
   // Note: You can also attach 'input' event listeners to .balloon-month and .balloon-amount here later

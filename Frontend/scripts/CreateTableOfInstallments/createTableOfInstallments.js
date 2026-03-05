@@ -40,9 +40,9 @@ export const createTableOfInstallments = () => {
   const onPossessionPercent = parseFloat(onPossessionAmountValues) || 0;
 
   const installmentPerAmount =
-    totalPriceNumeric -
+    ((totalPriceNumeric -
     (totalPriceNumeric * downPaymentPercent) / 100 -
-    (totalPriceNumeric * onPossessionPercent) / 100;
+    (totalPriceNumeric * onPossessionPercent) / 100) / getInstallmentNumber).toFixed(2);
 
   // 1. GATHER ALL BALLOON PAYMENTS FROM THE DOM
   const balloonRows = document.querySelectorAll(".balloon-row");

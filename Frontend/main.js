@@ -13,6 +13,7 @@ import { destroyInstallmentTable } from "./scripts/CreateTableOfInstallments/des
 import { emptyFinanceFields } from "./scripts/changeFields.js/emptyTheFinanceFields.js";
 import { getLeadData } from "./scripts/Bitrix24HelperFunctions/getLeadData.js";
 import { addBalloonPaymentRow } from "./scripts/ballonPayment/ballonPayment.js";
+import { generatePDFOfSummaryForBoxPark3 } from "./scripts/generatePDF/generatePDFForBoxPark3.js";
 // import { disableTheDownloadButton } from "./scripts/changeVisibiltyOfFeilds/disableTheDownloadButton.js";
 
 // A simple console log to verify connection
@@ -45,7 +46,7 @@ const handleFilterChange = async () => {
     project: projectSelect.value,
     propertyType: propertyTypeSelect.value,
     propertyCategory: propertyCategorySelect.value,
-    propertyFloor: propertyFloorSelect.value
+    propertyFloor: propertyFloorSelect.value,
   };
 
   console.log("Current filters:", filters);
@@ -83,32 +84,44 @@ const handlePaymentMethodChange = () => {
 
 // handle the change of the downpayment percentage,on possession percentage, and installment plans
 const handlechangeOfFinanceValues = () => {
- if( downPaymentPercentageSelect.value < 5 || downPaymentPercentageSelect.value > 100 ){
+  if (
+    downPaymentPercentageSelect.value < 5 ||
+    downPaymentPercentageSelect.value > 100
+  ) {
     downloadButtonSelect.disabled = true;
     attachPDFButtonSelect.disabled = true;
-    downloadButtonSelect.classList.add("opacity-50", "cursor-not-allowed", "pointer-events-none");
+    downloadButtonSelect.classList.add(
+      "opacity-50",
+      "cursor-not-allowed",
+      "pointer-events-none",
+    );
     document.getElementById("downpayment-warning").classList.remove("hidden");
     emptyFinanceFields();
     destroyInstallmentTable();
- } 
- else {
+  } else {
     downloadButtonSelect.disabled = false;
     attachPDFButtonSelect.disabled = false;
-    downloadButtonSelect.classList.remove("opacity-50", "cursor-not-allowed", "pointer-events-none");
+    downloadButtonSelect.classList.remove(
+      "opacity-50",
+      "cursor-not-allowed",
+      "pointer-events-none",
+    );
     document.getElementById("downpayment-warning").classList.add("hidden");
     changeTheFinanceFields();
     createTableOfInstallments();
- }
-
-  
+  }
 };
 
 const downloadPDFSummary = async () => {
-  const pdfDoc = await generatePDFOfSummary();
   const projectText = projectSelect.options[projectSelect.selectedIndex].text;
+
+  var pdfDoc;
+  if (projectText == "Box Park-3")
+    pdfDoc = await generatePDFOfSummaryForBoxPark3();
+  else pdfDoc = await generatePDFOfSummary();
   const leadData = await getLeadData(getPlacementInfo().options.ID);
-  const leadTitle = leadData['TITLE'];
-  const leadId = leadData['ID'];
+  const leadTitle = leadData["TITLE"];
+  const leadId = leadData["ID"];
   pdfDoc.save(`${projectText}-${leadTitle}-${leadId}_investment_summary.pdf`);
 };
 
@@ -145,8 +158,8 @@ export const attachPDFToLead = async () => {
 
   // 1. UI: Start Processing
   attachBtn.disabled = true;
-  attachBtn.classList.remove('bg-pci-gold', 'hover:bg-white', 'text-pci-blue');
-  attachBtn.classList.add('bg-gray-400', 'text-white', 'cursor-wait');
+  attachBtn.classList.remove("bg-pci-gold", "hover:bg-white", "text-pci-blue");
+  attachBtn.classList.add("bg-gray-400", "text-white", "cursor-wait");
   attachBtn.innerHTML = `
     <svg class="animate-spin h-5 w-5 mr-3 text-white inline" viewBox="0 0 24 24">
       <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
@@ -174,21 +187,26 @@ export const attachPDFToLead = async () => {
     await attachFileToLead(leadId, fileFile);
 
     // 4. UI: Success State (Green)
-    attachBtn.classList.replace('bg-gray-400', 'bg-green-600');
+    attachBtn.classList.replace("bg-gray-400", "bg-green-600");
     attachBtn.innerHTML = "✅ Successfully Attached!";
-
   } catch (error) {
     // 5. UI: Error State (Red)
     console.error("Attachment failed:", error);
-    attachBtn.classList.replace('bg-gray-400', 'bg-red-600');
+    attachBtn.classList.replace("bg-gray-400", "bg-red-600");
     attachBtn.innerHTML = "❌ Error: Try Again";
   } finally {
     // 6. Reset: Restore button after 3 seconds
     setTimeout(() => {
       attachBtn.disabled = false;
       attachBtn.innerHTML = originalContent;
-      attachBtn.classList.remove('bg-green-600', 'bg-red-600', 'bg-gray-400', 'text-white', 'cursor-wait');
-      attachBtn.classList.add('bg-pci-gold', 'text-pci-blue', 'hover:bg-white');
+      attachBtn.classList.remove(
+        "bg-green-600",
+        "bg-red-600",
+        "bg-gray-400",
+        "text-white",
+        "cursor-wait",
+      );
+      attachBtn.classList.add("bg-pci-gold", "text-pci-blue", "hover:bg-white");
     }, 3000);
   }
 };

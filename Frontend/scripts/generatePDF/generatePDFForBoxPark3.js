@@ -418,7 +418,7 @@ export const generatePDFOfSummaryForBoxPark3 = async () => {
       margin: { left: 15, right: 15 },
     });
 
-    // Optional: If you have elements drawing *after* this on Page 1,
+    
     // update currentY so they don't overlap the new table.
     currentY = doc.autoTable.previous.finalY + 15;
 
@@ -464,7 +464,7 @@ export const generatePDFOfSummaryForBoxPark3 = async () => {
     ];
 
     doc.autoTable({
-      startY: doc.autoTable.previous.finalY + 15,
+      startY: 55,
       head: [["Financial Breakdown", "Value"]],
       body: financialBody,
       theme: "striped",

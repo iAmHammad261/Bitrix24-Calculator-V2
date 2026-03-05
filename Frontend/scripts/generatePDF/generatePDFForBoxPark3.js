@@ -362,9 +362,8 @@ const currentCalculations = {
     // 2. Prepare 4-column data to keep the layout compact but structured
     const propertyDetailsBody = [
         ['Project:', currentCalculations.projectName, 'Unit Number:', currentCalculations.unitNumber],
-        ['Payment Plan:', currentCalculations.condition, 'Type:', currentCalculations.propertyType],
-        ['Category:', currentCalculations.categoryType, 'Floor:', currentCalculations.floorType],
-        ['Total Area:', totalAreaValue, '', ''] // Leave last two cells blank for the odd row
+        ['Type:', currentCalculations.propertyType, 'Category:', currentCalculations.categoryType],
+        ['Floor:', currentCalculations.floorType, 'Total Area:', totalAreaValue] 
     ];
 
     // 3. Render the table using autoTable

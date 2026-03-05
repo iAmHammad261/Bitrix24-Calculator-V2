@@ -43,7 +43,7 @@ export const addBalloonPaymentRow = () => {
   const removeBtn = row.querySelector('.remove-balloon-btn');
   removeBtn.addEventListener('click', () => {
     row.remove();
-    // TODO: Call your calculation update function here later
+    changeTheFinanceFields();
     createTableOfInstallments();
   });
 
@@ -54,14 +54,14 @@ export const addBalloonPaymentRow = () => {
   monthInput.addEventListener('input', (event) => {
     console.log(`Month changed to: ${event.target.value}`);
     // Call your recalculation functions here
-    // changeTheFinanceFields();
+    changeTheFinanceFields();
     createTableOfInstallments();
   });
 
   amountInput.addEventListener('input', (event) => {
     console.log(`Amount changed to: ${event.target.value}`);
     // Call your recalculation functions here
-    // changeTheFinanceFields();
+    changeTheFinanceFields();
     createTableOfInstallments();
   });
   

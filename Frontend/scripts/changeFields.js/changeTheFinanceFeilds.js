@@ -62,6 +62,7 @@ export const changeTheFinanceFields = () => {
     installmentAmountField.textContent = "";
     installmentAmountPerInstallmentField.textContent = "";
     installmentUnitsField.textContent = "";
+    balloonTotalField.textContent = "";
     return;
   }
 

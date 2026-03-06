@@ -1,19 +1,17 @@
 import { callBX24Method } from "../Bitrix24HelperFunctions/callBX24Method.js";
 
 export const changeTheItemFields = async (productID) => {
+  const priceField = document.getElementById("total-price");
 
-    const priceField = document.getElementById("total-price");
+  const projectFieldValue = document.getElementById("project-name").value;
 
-    if(!productID){
-        priceField.value = '';
-        return;
-    }
-
-
+  if (!productID) {
+    priceField.value = "";
+    return;
+  }
 
   const formatter = new Intl.NumberFormat("en-US", {
     style: "decimal",
-
     currency: "USD",
   });
 
@@ -26,12 +24,26 @@ export const changeTheItemFields = async (productID) => {
   console.log("Fetched product data:", productData);
 
   const baseRate = productData.product.property115.value || 0;
+
   const grossarea = productData.product.property113.value || 0;
+  const netArea = productData.product.property149.value || 0;
+
+  const floor = productData.product.property135.value || "";
+
+  var priceToUse;
+
+  if (projectFieldValue == "Box Park-3") {
+    if (floor == "299" || floor == "301" || floor == "249") {
+       priceToUse = Number(baseRate.replace(/,/g, "")) * Number(netArea.replace(/,/g, ""));
+    }
+  } else {
+    priceToUse = Number(baseRate.replace(/,/g, "")) * Number(grossarea.replace(/,/g, ""));
+  }
 
   const valuesToSet = {
     totalPrice: Number(
       (
-        Number(baseRate.replace(/,/g, "")) * Number(grossarea.replace(/,/g, ""))
+        priceToUse
       ).toFixed(2),
     ),
     grossArea: grossarea,
@@ -47,5 +59,7 @@ export const changeTheItemFields = async (productID) => {
 
   grossAreaField.value = valuesToSet.grossArea;
   baseRateField.value = valuesToSet.baseRate;
-  priceField.value =  valuesToSet.totalPrice ? formatter.format(valuesToSet.totalPrice) : '';
+  priceField.value = valuesToSet.totalPrice
+    ? formatter.format(valuesToSet.totalPrice)
+    : "";
 };

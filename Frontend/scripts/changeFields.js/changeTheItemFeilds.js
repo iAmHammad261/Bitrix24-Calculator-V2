@@ -50,7 +50,7 @@ export const changeTheItemFields = async (productID) => {
   }
 
   var priceCalculatorNominator;
-   if(priceToUse.replace(/,/g, "")  > 10000000    ) {
+   if(priceToUse > 10000000    ) {
     priceCalculatorNominator = 1200000
   }
   else {

@@ -67,11 +67,7 @@ export const changeTheItemFields = async (productID) => {
 
 
   const valuesToSet = {
-    totalPrice: Number(
-      (
-        priceToUse
-      ),
-    ),
+    totalPrice: priceToUse.toFixed(2),
     grossArea: grossarea,
     baseRate: baseRate,
     downPaymentPercentage: dpPercentage,

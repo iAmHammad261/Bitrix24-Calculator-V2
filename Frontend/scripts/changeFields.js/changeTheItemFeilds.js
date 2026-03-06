@@ -4,8 +4,9 @@ export const changeTheItemFields = async (productID) => {
   const priceField = document.getElementById("total-price");
 
   const projectFieldValue = document.getElementById("project-name").value;
-  const downPaymentPercentageField = document.getElementById("downpayment-percentage");
-  
+  const downPaymentPercentageField = document.getElementById(
+    "downpayment-percentage",
+  );
 
   if (!productID) {
     priceField.value = "";
@@ -32,7 +33,6 @@ export const changeTheItemFields = async (productID) => {
 
   const floor = productData.product.property135.value || "";
 
-
   console.log("floor:", floor);
   console.log("baseRate:", baseRate);
   console.log("grossarea:", grossarea);
@@ -43,28 +43,29 @@ export const changeTheItemFields = async (productID) => {
 
   if (projectFieldValue == "673") {
     if (floor == "299" || floor == "301" || floor == "249") {
-       priceToUse = Number(baseRate.replace(/,/g, "")) * Number(netArea.replace(/,/g, ""));
+      priceToUse =
+        Number(baseRate.replace(/,/g, "")) * Number(netArea.replace(/,/g, ""));
     }
   } else {
-    priceToUse = Number(baseRate.replace(/,/g, "")) * Number(grossarea.replace(/,/g, ""));
+    priceToUse =
+      Number(baseRate.replace(/,/g, "")) * Number(grossarea.replace(/,/g, ""));
   }
 
   var priceCalculatorNominator;
-   if(priceToUse > 10000000    ) {
-    priceCalculatorNominator = 1200000
+  if (priceToUse > 10000000) {
+    priceCalculatorNominator = 1200000;
+  } else {
+    priceCalculatorNominator = 800000;
   }
-  else {
-    priceCalculatorNominator = 800000
-  }
 
-
-
+  console.log("price to use for down payment calculation:", priceToUse);
   console.log("price calcualtor nominator", priceCalculatorNominator);
 
-  const dpPercentage = (priceCalculatorNominator / priceToUse * 100).toFixed(5);
+  const dpPercentage = ((priceCalculatorNominator / priceToUse) * 100).toFixed(
+    5,
+  );
 
   console.log("Calculated down payment percentage:", dpPercentage);
-
 
   const valuesToSet = {
     totalPrice: priceToUse.toFixed(2),
@@ -82,7 +83,9 @@ export const changeTheItemFields = async (productID) => {
 
   grossAreaField.value = valuesToSet.grossArea;
   baseRateField.value = valuesToSet.baseRate;
-  projectFieldValue == "673" ? downPaymentPercentageField.value = valuesToSet.downPaymentPercentage : 50;
+  projectFieldValue == "673"
+    ? (downPaymentPercentageField.value = valuesToSet.downPaymentPercentage)
+    : 50;
   priceField.value = valuesToSet.totalPrice
     ? formatter.format(valuesToSet.totalPrice)
     : "";

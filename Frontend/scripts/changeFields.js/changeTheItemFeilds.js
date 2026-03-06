@@ -4,6 +4,8 @@ export const changeTheItemFields = async (productID) => {
   const priceField = document.getElementById("total-price");
 
   const projectFieldValue = document.getElementById("project-name").value;
+  const downPaymentPercentageField = document.getElementById("downpayment-percentage");
+  
 
   if (!productID) {
     priceField.value = "";
@@ -47,6 +49,20 @@ export const changeTheItemFields = async (productID) => {
     priceToUse = Number(baseRate.replace(/,/g, "")) * Number(grossarea.replace(/,/g, ""));
   }
 
+  var priceCalculatorNominator;
+   if(priceToUse.replace(/,/g, "")  > 10000000    ) {
+    priceCalculatorNominator = 1200000
+  }
+  else {
+    priceCalculatorNominator = 800000
+  }
+
+
+  const dpPercentage = (priceCalculatorNominator / priceToUse.replace(/,/g, "") * 100).toFixed(2);
+
+  console.log("Calculated down payment percentage:", dpPercentage);
+
+
   const valuesToSet = {
     totalPrice: Number(
       (
@@ -55,6 +71,7 @@ export const changeTheItemFields = async (productID) => {
     ),
     grossArea: grossarea,
     baseRate: baseRate,
+    downPaymentPercentage: dpPercentage,
   };
 
   console.log("Calculated values to set:", valuesToSet);
@@ -66,6 +83,7 @@ export const changeTheItemFields = async (productID) => {
 
   grossAreaField.value = valuesToSet.grossArea;
   baseRateField.value = valuesToSet.baseRate;
+  downPaymentPercentageField.value = valuesToSet.downPaymentPercentage;
   priceField.value = valuesToSet.totalPrice
     ? formatter.format(valuesToSet.totalPrice)
     : "";
